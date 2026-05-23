@@ -5,36 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>M.6/1 Memory Graduation</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-storage.js";
-  import { getDatabase, ref as dbRef, set, get } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
-  const firebaseConfig = {
-    apiKey: "AIzaSyDvswHDxhTcMqQYJL1zkUl-GOLA-NkesUk",
-    authDomain: "graduation6170.firebaseapp.com",
-    databaseURL: "https://graduation6170-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "graduation6170",
-    storageBucket: "graduation6170.firebasestorage.app",
-    messagingSenderId: "739483048204",
-    appId: "1:739483048204:web:3651a4484d27688be61129",
-    measurementId: "G-V4H4Z9Q7FL"
-  };
-  const app = initializeApp(firebaseConfig);
-  const storage = getStorage(app);
-  const database = getDatabase(app);
-  window._fbStorage = storage;
-  window._fbDatabase = database;
-  window._fbRef = ref;
-  window._dbRef = dbRef;
-  window._uploadBytes = uploadBytes;
-  window._getDownloadURL = getDownloadURL;
-  window._set = set;
-  window._get = get;
-  window._firebaseReady = true;
-  window.dispatchEvent(new Event('firebaseReady'));
-</script>
 <style>
-:root{--gold:#c9a84c;--gold-light:#e8d08a;--gold-dim:#8a6f32;--cream:#fdf6e3;--deep:#0d0b07;--dark:#1a1610;--mid:#2a2318;--text:#e8dfc8;--text-dim:#a09070;--board-green:#1a3326;--board-dark:#0f1f16;}
+:root{--gold:#c9a84c;--gold-light:#e8d08a;--gold-dim:#8a6f32;--cream:#fdf6e3;--deep:#0d0b07;--dark:#1a1610;--mid:#2a2318;--text:#e8dfc8;--text-dim:#a09070;--board-green:#1a3326;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
@@ -44,7 +16,7 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 #hero{position:relative;width:100%;height:100vh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
 #hero-bg{position:absolute;inset:0;background:#1a1610;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 #hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.55;}
-#hero-bg .ph-wrap{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0.2;}
+#hero-bg .ph-wrap{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0.15;}
 #hero-bg .ph-wrap svg{width:80px;height:80px;fill:var(--gold);}
 #hero-bg .ph-wrap span{font-family:'Montserrat',sans-serif;font-size:14px;letter-spacing:3px;color:var(--gold);}
 .particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
@@ -60,10 +32,6 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .hero-title span{color:var(--gold);}
 .hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3.5vw,36px);font-style:italic;font-weight:300;color:var(--cream);opacity:.85;animation:fadeUp 2.2s ease forwards;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.hero-upload-btn{margin-top:24px;position:relative;cursor:pointer;}
-.hero-upload-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.hero-upload-btn .btn-inner{display:flex;align-items:center;gap:8px;padding:10px 24px;border:1px solid var(--gold-dim);color:var(--gold-light);font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;background:rgba(201,168,76,.08);transition:all .3s;}
-.hero-upload-btn:hover .btn-inner{background:rgba(201,168,76,.18);border-color:var(--gold);}
 .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;animation:bounce 2s infinite;}
 .scroll-hint span{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold-dim);}
 .scroll-hint svg{width:20px;height:20px;fill:none;stroke:var(--gold-dim);stroke-width:2;}
@@ -87,25 +55,16 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .vip-card{display:flex;flex-direction:column;align-items:center;cursor:pointer;}
 .vip-ring{position:relative;width:140px;height:140px;border-radius:50%;padding:3px;background:conic-gradient(var(--gold),var(--gold-light),var(--gold-dim),var(--gold));box-shadow:0 0 30px rgba(201,168,76,.3);transition:box-shadow .3s,transform .3s;}
 .vip-card:hover .vip-ring{box-shadow:0 0 50px rgba(201,168,76,.6);transform:translateY(-4px);}
-.vip-photo{width:100%;height:100%;border-radius:50%;background:var(--mid);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
+.vip-photo{width:100%;height:100%;border-radius:50%;background:var(--mid);overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .vip-photo img{width:100%;height:100%;object-fit:cover;}
-.ph-icon{width:40px;height:40px;fill:var(--gold-dim);opacity:.5;}
-.vip-upload{position:absolute;bottom:0;right:0;width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.5);transition:transform .2s;}
-.vip-upload:hover{transform:scale(1.1);}
-.vip-upload input{position:absolute;inset:0;opacity:0;cursor:pointer;}
-.vip-upload svg{width:14px;height:14px;fill:var(--deep);}
+.ph-icon{fill:var(--gold-dim);opacity:.4;}
 .vip-badge{margin-top:14px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid var(--gold-dim);padding:3px 12px;border-radius:20px;margin-bottom:6px;}
 .vip-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--cream);text-align:center;}
 .students-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:24px;}
-.student-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.1);border-radius:4px;padding:20px 16px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .3s;position:relative;}
+.student-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.1);border-radius:4px;padding:20px 16px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .3s;}
 .student-card:hover{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.05);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.4);}
-.student-photo{width:90px;height:90px;border-radius:50%;background:var(--mid);overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid rgba(201,168,76,.2);margin-bottom:12px;position:relative;flex-shrink:0;}
+.student-photo{width:90px;height:90px;border-radius:50%;background:var(--mid);overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid rgba(201,168,76,.2);margin-bottom:12px;flex-shrink:0;}
 .student-photo img{width:100%;height:100%;object-fit:cover;}
-.student-photo .ph-icon{width:30px;height:30px;}
-.student-upload-btn{position:absolute;bottom:0;right:0;width:26px;height:26px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.5);cursor:pointer;transition:transform .2s;}
-.student-upload-btn:hover{transform:scale(1.15);}
-.student-upload-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;}
-.student-upload-btn svg{width:12px;height:12px;fill:var(--deep);}
 .student-number{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:2px;}
 .student-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--cream);text-align:center;line-height:1.3;}
 .student-nickname{font-size:12px;font-style:italic;color:var(--text-dim);margin-top:2px;}
@@ -119,7 +78,6 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .modal-close:hover{color:var(--gold);}
 .modal-photo{width:140px;height:140px;border-radius:50%;background:var(--mid);overflow:hidden;margin:0 auto 24px;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;}
 .modal-photo img{width:100%;height:100%;object-fit:cover;}
-.modal-photo .ph-icon{width:50px;height:50px;}
 .modal-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--cream);text-align:center;margin-bottom:4px;}
 .modal-role{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-align:center;margin-bottom:24px;}
 .modal-info{display:flex;flex-direction:column;gap:12px;}
@@ -143,7 +101,7 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .event-slide{display:none;animation:slideIn .4s ease;}
 .event-slide.active{display:block;}
 @keyframes slideIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
-.event-media{width:100%;aspect-ratio:16/9;background:var(--mid);border:1px solid rgba(201,168,76,.1);border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:28px;position:relative;}
+.event-media{width:100%;aspect-ratio:16/9;background:var(--mid);border:1px solid rgba(201,168,76,.1);border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:28px;}
 .event-media img,.event-media video{width:100%;height:100%;object-fit:cover;}
 .media-ph{display:flex;flex-direction:column;align-items:center;gap:12px;opacity:.3;}
 .media-ph svg{width:64px;height:64px;fill:var(--gold);}
@@ -187,8 +145,8 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .board-ledge{position:absolute;bottom:-6px;left:-8px;right:-8px;height:20px;background:linear-gradient(180deg,#4a341e,#3d2b14);border-radius:0 0 4px 4px;}
 .board-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:rgba(255,255,255,.25);text-align:center;margin-bottom:36px;letter-spacing:3px;}
 .messages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}
-.msg-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:20px 18px;position:relative;transform:rotate(var(--rot,0deg));transition:transform .3s;}
-.msg-card:hover{transform:rotate(0deg) scale(1.02);z-index:2;}
+.msg-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:20px 18px;transform:rotate(var(--rot,0deg));transition:transform .3s;}
+.msg-card:hover{transform:rotate(0deg) scale(1.02);z-index:2;position:relative;}
 .msg-from{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:8px;}
 .msg-text{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1.7;font-style:italic;color:rgba(255,255,255,.6);}
 .chalk-line{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.06);pointer-events:none;}
@@ -196,7 +154,14 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 footer{background:var(--deep);text-align:center;padding:40px;border-top:1px solid rgba(201,168,76,.1);}
 .footer-text{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--gold-dim);letter-spacing:2px;}
 
-@media(max-width:768px){.section-wrap{padding:70px 20px;}.vip-row{gap:24px;}.vip-ring{width:110px;height:110px;}.students-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px;}.blackboard{padding:30px 20px;}.cd-num{font-size:60px;}}
+@media(max-width:768px){
+  .section-wrap{padding:70px 20px;}
+  .vip-row{gap:24px;}
+  .vip-ring{width:110px;height:110px;}
+  .students-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px;}
+  .blackboard{padding:30px 20px;}
+  .cd-num{font-size:60px;}
+}
 </style>
 </head>
 <body>
@@ -204,6 +169,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 <!-- HERO -->
 <section id="hero">
   <div id="hero-bg">
+    <!-- Set HERO_IMAGE in config below, or leave null for placeholder -->
     <div class="ph-wrap" id="hero-ph">
       <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
       <span>Cover Photo</span>
@@ -220,13 +186,6 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
     <div class="hero-class">Class of 2026 &nbsp;·&nbsp; M.6/1</div>
     <h1 class="hero-title">Memory<br><span>Graduation</span></h1>
     <p class="hero-sub">Where every moment becomes a memory forever.</p>
-    <label class="hero-upload-btn">
-      <input type="file" accept="image/*" id="hero-file-input"/>
-      <div class="btn-inner">
-        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
-        Upload Cover Photo
-      </div>
-    </label>
   </div>
   <div class="scroll-hint">
     <span>scroll</span>
@@ -326,7 +285,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('student-modal').classList.remove('active')">✕</button>
     <div class="modal-photo" id="modal-photo">
-      <svg class="ph-icon" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+      <svg class="ph-icon" style="width:50px;height:50px" viewBox="0 0 24 24" fill="var(--gold-dim)"><path opacity=".4" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
     </div>
     <div class="modal-name" id="modal-name">Student Name</div>
     <div class="modal-role" id="modal-role">STUDENT</div>
@@ -343,17 +302,21 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 <footer><p class="footer-text">M.6/1 · Class of 2026 · Every ending is a new beginning ✦</p></footer>
 
 <script>
-// ══════════════════════════════════════════════════════
-// ██████  CONFIGURATION ZONE — Edit These  ██████████
-// ══════════════════════════════════════════════════════
+// ╔══════════════════════════════════════════════════════╗
+// ║           CONFIGURATION — Edit everything here       ║
+// ╚══════════════════════════════════════════════════════╝
 
-/* COUNTDOWN: set to "YYYY-MM-DDTHH:MM:SS" or leave null for template */
+// Hero cover photo — put filename here, e.g. "images/cover.jpg", or null for placeholder
+const HERO_IMAGE = null;
+
+// Countdown target — "YYYY-MM-DDTHH:MM:SS" or null for template dashes
 const COUNTDOWN_TARGET = null;
 // Example: const COUNTDOWN_TARGET = "2026-09-01T09:00:00";
 
-/* TIMELINE EVENTS — only listed dates appear in slider
-   mediaType: "image" or "video"
-   mediaUrl: direct URL to image/video, or null for placeholder */
+// ── TIMELINE EVENTS ──────────────────────────────────────
+// mediaUrl: path to your image/video file e.g. "images/may18.jpg"
+//           or null to show a placeholder box
+// mediaType: "image" or "video"
 const TIMELINE_EVENTS = [
   {
     date: "2026-05-18",
@@ -362,7 +325,6 @@ const TIMELINE_EVENTS = [
     mediaUrl: "att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg",
     mediaType: "image"
   },
-  
   {
     date: "2026-05-22",
     title: "— Completed First week cycle —",
@@ -370,63 +332,64 @@ const TIMELINE_EVENTS = [
     mediaUrl: "att.gRQr-4-Q0rF1WpEVHdc0jYlqWaI2j9whdsIu12ooON0.jpeg",
     mediaType: "image"
   },
-  // Add more:
-  // { date: "2026-06-10", title: "Graduation Day", description: "The day we've all been waiting for...", mediaUrl: "https://...", mediaType: "image" },
+  // Add more events like this:
+  // { date: "2026-06-10", title: "Sports Day", description: "...", mediaUrl: "images/sports.jpg", mediaType: "image" },
 ];
 
-/* VIP STUDENTS (3 leaders) — copy the format below */
+// ── VIP STUDENTS (3 leaders) ─────────────────────────────
+// photo: filename e.g. "photos/bank.jpg", or null for placeholder silhouette
 const VIP_STUDENTS = [
-  { id:"vip-1", name:"Somchai Rakdee",    role:"Class President",   nickname:"Bank",  birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
-  { id:"vip-2", name:"— Name —",          role:"Vice President",    nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
-  { id:"vip-3", name:"— Name —",          role:"Financial Officer", nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
+  { id:"vip-1", name:"Somchai Rakdee",  role:"Class President",   photo:null, nickname:"Bank",  birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
+  { id:"vip-2", name:"— Name —",        role:"Vice President",    photo:null, nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
+  { id:"vip-3", name:"— Name —",        role:"Financial Officer", photo:null, nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
 ];
 
-/* REGULAR STUDENTS — 41 entries. Copy the format of index 0. */
+// ── REGULAR STUDENTS (41 students, numbered 4–44) ────────
 const REGULAR_STUDENTS = [
-  { id:"stu-1",  name:"Nattapat Jaidee",   nickname:"Tong",  birthday:"July 22, 2007",    dream:"Doctor at Mahidol University",        quote:"Every day is a new chance." },
-  { id:"stu-2",  name:"— Student 5 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-3",  name:"— Student 6 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-4",  name:"— Student 7 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-5",  name:"— Student 8 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-6",  name:"— Student 9 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-7",  name:"— Student 10 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-8",  name:"— Student 11 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-9",  name:"— Student 12 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-10", name:"— Student 13 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-11", name:"— Student 14 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-12", name:"— Student 15 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-13", name:"— Student 16 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-14", name:"— Student 17 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-15", name:"— Student 18 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-16", name:"— Student 19 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-17", name:"— Student 20 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-18", name:"— Student 21 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-19", name:"— Student 22 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-20", name:"— Student 23 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-21", name:"— Student 24 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-22", name:"— Student 25 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-23", name:"— Student 26 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-24", name:"— Student 27 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-25", name:"— Student 28 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-26", name:"— Student 29 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-27", name:"— Student 30 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-28", name:"— Student 31 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-29", name:"— Student 32 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-30", name:"— Student 33 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-31", name:"— Student 34 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-32", name:"— Student 35 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-33", name:"— Student 36 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-34", name:"— Student 37 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-35", name:"— Student 38 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-36", name:"— Student 39 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-37", name:"— Student 40 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-38", name:"— Student 41 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-39", name:"— Student 42 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-40", name:"— Student 43 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
-  { id:"stu-41", name:"— Student 44 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-1",  name:"Nattapat Jaidee",  photo:null, nickname:"Tong", birthday:"July 22, 2007",  dream:"Doctor at Mahidol University",  quote:"Every day is a new chance." },
+  { id:"stu-2",  name:"— Student 5 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-3",  name:"— Student 6 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-4",  name:"— Student 7 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-5",  name:"— Student 8 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-6",  name:"— Student 9 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-7",  name:"— Student 10 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-8",  name:"— Student 11 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-9",  name:"— Student 12 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-10", name:"— Student 13 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-11", name:"— Student 14 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-12", name:"— Student 15 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-13", name:"— Student 16 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-14", name:"— Student 17 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-15", name:"— Student 18 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-16", name:"— Student 19 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-17", name:"— Student 20 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-18", name:"— Student 21 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-19", name:"— Student 22 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-20", name:"— Student 23 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-21", name:"— Student 24 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-22", name:"— Student 25 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-23", name:"— Student 26 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-24", name:"— Student 27 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-25", name:"— Student 28 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-26", name:"— Student 29 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-27", name:"— Student 30 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-28", name:"— Student 31 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-29", name:"— Student 32 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-30", name:"— Student 33 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-31", name:"— Student 34 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-32", name:"— Student 35 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-33", name:"— Student 36 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-34", name:"— Student 37 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-35", name:"— Student 38 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-36", name:"— Student 39 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-37", name:"— Student 40 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-38", name:"— Student 41 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-39", name:"— Student 42 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-40", name:"— Student 43 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-41", name:"— Student 44 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
 ];
 
-/* TEACHER QUOTES */
+// ── TEACHER QUOTES ───────────────────────────────────────
 const TEACHER_QUOTES = [
   { name:"— Teacher Name —", subject:"Subject", quote:"Leave a beautiful message for the students here. Words that will inspire them long after they've left these halls." },
   { name:"— Teacher Name —", subject:"Subject", quote:"Fill this space with your heartfelt blessing and words of wisdom for our graduating class." },
@@ -436,7 +399,7 @@ const TEACHER_QUOTES = [
   { name:"— Teacher Name —", subject:"Subject", quote:"The greatest gift a teacher gives is the belief in a student's potential." },
 ];
 
-/* MESSAGE WALL */
+// ── MESSAGE WALL ─────────────────────────────────────────
 const MESSAGES = [
   { from:"— Name —", text:"Write your message to the class here. Something warm, funny, or heartfelt." },
   { from:"— Name —", text:"A farewell note. What do you want your classmates to remember?" },
@@ -451,7 +414,8 @@ const MESSAGES = [
   { from:"— Name —", text:"Keep in touch. Edit me with a real message." },
   { from:"— Name —", text:"Our story doesn't end here — this is just the prologue." },
 ];
-// ══════════════════════════════════════════════════════
+
+// ╚══════════════════════════════════════════════════════╝
 
 // PARTICLES
 (()=>{
@@ -464,60 +428,20 @@ const MESSAGES = [
   }
 })();
 
-// ── FIREBASE UPLOAD HELPER (all slots use this) ──
-async function fbUploadPhoto(storagePath, dbPath, file){
-  if(!window._firebaseReady) return null;
-  try{
-    const storRef = window._fbRef(window._fbStorage, storagePath);
-    await window._uploadBytes(storRef, file);
-    const url = await window._getDownloadURL(storRef);
-    await window._set(window._dbRef(window._fbDatabase, dbPath), url);
-    return url;
-  }catch(err){ console.warn('Firebase upload error:', err); return null; }
+// HERO IMAGE
+if(HERO_IMAGE){
+  const img=document.getElementById('hero-img');
+  img.src=HERO_IMAGE; img.style.display='block';
+  document.getElementById('hero-ph').style.display='none';
 }
 
-// ── APPLY PHOTO TO DOM SLOT ──
-function applyPhotoToSlot(slotId, url){
-  const cont = document.getElementById('photo-' + slotId);
-  if(!cont) return;
-  let img = cont.querySelector('img');
-  if(!img){ img = document.createElement('img'); cont.insertBefore(img, cont.firstChild); }
-  img.src = url;
-  img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
-  cont.querySelector('.ph-icon')?.remove();
+// HELPERS
+const personSVG=(sz='40px')=>`<svg class="ph-icon" style="width:${sz};height:${sz}" viewBox="0 0 24 24" fill="var(--gold-dim)"><path opacity=".4" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>`;
+
+function photoOrPh(photoPath, sz){
+  if(photoPath) return `<img src="${photoPath}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/>`;
+  return personSVG(sz);
 }
-
-// HERO UPLOAD
-document.getElementById('hero-file-input').addEventListener('change', async function(e){
-  const file = e.target.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const img = document.getElementById('hero-img');
-    img.src = ev.target.result; img.style.display = 'block';
-    document.getElementById('hero-ph').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-  // Upload to Firebase in background
-  await fbUploadPhoto('hero/cover.jpg', 'photos/hero', file);
-});
-
-// ICON HELPERS
-const personSVG=(sz='40px')=>`<svg class="ph-icon" style="width:${sz};height:${sz}" viewBox="0 0 24 24" fill="var(--gold-dim)"><path opacity=".5" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>`;
-const uploadSVG=`<svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="var(--deep)"><path d="M9 16h6v-6h4l-7-7-7 7h4z"/></svg>`;
-const starSVG=`<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--gold)"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`;
-
-// STUDENT PHOTO UPLOAD — shows preview instantly, saves to Firebase
-async function uploadStudentPhoto(id, input){
-  const file = input.files[0]; if(!file) return;
-  // Instant local preview
-  const reader = new FileReader();
-  reader.onload = ev => applyPhotoToSlot(id, ev.target.result);
-  reader.readAsDataURL(file);
-  // Upload to Firebase Storage + save URL to Realtime DB under photos/{id}
-  const url = await fbUploadPhoto(`students/${id}.jpg`, `photos/${id}`, file);
-  if(url) applyPhotoToSlot(id, url); // swap local blob with permanent URL
-}
-window.uploadStudentPhoto = uploadStudentPhoto;
 
 // BUILD VIP
 function buildVIP(){
@@ -527,17 +451,11 @@ function buildVIP(){
     div.className='vip-card';
     div.innerHTML=`
       <div class="vip-ring">
-        <div class="vip-photo" id="photo-${s.id}">
-          ${personSVG('40px')}
-          <label class="vip-upload" title="Upload photo">
-            <input type="file" accept="image/*" onchange="uploadStudentPhoto('${s.id}',this)"/>
-            ${uploadSVG}
-          </label>
-        </div>
+        <div class="vip-photo">${photoOrPh(s.photo,'40px')}</div>
       </div>
       <div class="vip-badge">${s.role}</div>
       <div class="vip-name">${s.name}</div>`;
-    div.addEventListener('click',e=>{if(e.target.closest('.vip-upload'))return;openModal(s,true);});
+    div.addEventListener('click',()=>openModal(s,true));
     row.appendChild(div);
   });
 }
@@ -549,17 +467,11 @@ function buildRegular(){
     const div=document.createElement('div');
     div.className='student-card';
     div.innerHTML=`
-      <div class="student-photo" id="photo-${s.id}">
-        ${personSVG('30px')}
-        <label class="student-upload-btn" title="Upload photo">
-          <input type="file" accept="image/*" onchange="uploadStudentPhoto('${s.id}',this)"/>
-          ${uploadSVG}
-        </label>
-      </div>
+      <div class="student-photo">${photoOrPh(s.photo,'30px')}</div>
       <div class="student-number">No. ${String(i+4).padStart(2,'0')}</div>
       <div class="student-name">${s.name}</div>
       <div class="student-nickname">${s.nickname!=='—'?s.nickname:''}</div>`;
-    div.addEventListener('click',e=>{if(e.target.closest('.student-upload-btn'))return;openModal(s,false);});
+    div.addEventListener('click',()=>openModal(s,false));
     grid.appendChild(div);
   });
 }
@@ -567,8 +479,9 @@ function buildRegular(){
 // MODAL
 function openModal(s,isVip){
   const ph=document.getElementById('modal-photo');
-  const src=document.getElementById('photo-'+s.id)?.querySelector('img')?.src;
-  ph.innerHTML=src?`<img src="${src}" style="width:100%;height:100%;object-fit:cover;">`:`${personSVG('50px')}`;
+  ph.innerHTML=s.photo
+    ?`<img src="${s.photo}" style="width:100%;height:100%;object-fit:cover;" onerror="this.replaceWith(${JSON.stringify(personSVG('50px'))})"/>`
+    :`${personSVG('50px')}`;
   document.getElementById('modal-name').textContent=s.name;
   document.getElementById('modal-role').textContent=isVip?(s.role||'VIP'):'STUDENT';
   document.getElementById('modal-nickname').textContent=s.nickname||'—';
@@ -587,14 +500,20 @@ function buildTimeline(){
   const dots=document.getElementById('tl-dots');
   if(!TIMELINE_EVENTS.length){
     document.getElementById('tl-date-display').textContent='— No Events Yet —';
-    slides.innerHTML=`<div class="event-slide active"><div class="event-media"><div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div></div><div class="event-info"><div class="event-date-tag">— Date TBD —</div><div class="event-title-txt">Event Name Placeholder</div><div class="event-desc">Describe what happened on this day. Configure events in the TIMELINE_EVENTS array in the source code.</div></div></div>`;
+    slides.innerHTML=`<div class="event-slide active"><div class="event-media"><div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div></div><div class="event-info"><div class="event-date-tag">— Date TBD —</div><div class="event-title-txt">Event Name Placeholder</div><div class="event-desc">Configure events in the TIMELINE_EVENTS array.</div></div></div>`;
     return;
   }
   TIMELINE_EVENTS.forEach((ev,i)=>{
     const slide=document.createElement('div');
     slide.className='event-slide'+(i===0?' active':'');
-    let media=ev.mediaUrl?(ev.mediaType==='video'?`<video src="${ev.mediaUrl}" controls style="width:100%;height:100%;object-fit:cover;"></video>`:`<img src="${ev.mediaUrl}" style="width:100%;height:100%;object-fit:cover;">`):
-      `<div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div>`;
+    let media;
+    if(ev.mediaUrl){
+      media = ev.mediaType==='video'
+        ? `<video src="${ev.mediaUrl}" controls style="width:100%;height:100%;object-fit:cover;"></video>`
+        : `<img src="${ev.mediaUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div class=media-ph><svg viewBox=\'0 0 24 24\'><path d=\'M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z\'/></svg><span>Image not found</span></div>'"/>`;
+    } else {
+      media=`<div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div>`;
+    }
     const d=new Date(ev.date);
     const fmt=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
     slide.innerHTML=`<div class="event-media">${media}</div><div class="event-info"><div class="event-date-tag">${fmt}</div><div class="event-title-txt">${ev.title}</div><div class="event-desc">${ev.description}</div></div>`;
@@ -662,28 +581,6 @@ function buildMessages(){
   });
 }
 
-// FIREBASE LOAD — restores ALL photo slots (hero + VIP + regular students)
-async function loadFromFirebase(){
-  if(!window._firebaseReady) return;
-  try{
-    // Load all saved photos from one DB path: photos/{slotId}
-    const snap = await window._get(window._dbRef(window._fbDatabase, 'photos'));
-    if(!snap.exists()) return;
-    const data = snap.val();
-    Object.entries(data).forEach(([id, url]) => {
-      if(id === 'hero'){
-        // Restore hero cover
-        const img = document.getElementById('hero-img');
-        if(img){ img.src = url; img.style.display = 'block'; }
-        document.getElementById('hero-ph')?.style.setProperty('display','none');
-      } else {
-        // Restore any student photo slot (vip-1, vip-2, vip-3, stu-1 … stu-41)
-        applyPhotoToSlot(id, url);
-      }
-    });
-  }catch(err){ console.warn('Firebase load error:', err); }
-}
-
 // INIT
 buildVIP();
 buildRegular();
@@ -691,8 +588,6 @@ buildTimeline();
 buildQuotes();
 buildMessages();
 if(COUNTDOWN_TARGET){updateCountdown();setInterval(updateCountdown,1000);}
-window.addEventListener('firebaseReady',loadFromFirebase);
-if(window._firebaseReady)loadFromFirebase();
 </script>
 </body>
 </html>
