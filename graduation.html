@@ -374,19 +374,57 @@ const TIMELINE_EVENTS = [
   // { date: "2026-06-10", title: "Graduation Day", description: "The day we've all been waiting for...", mediaUrl: "https://...", mediaType: "image" },
 ];
 
-/* VIP STUDENTS (3 leaders) */
+/* VIP STUDENTS (3 leaders) — copy the format below */
 const VIP_STUDENTS = [
-  { id:"vip-1", name:"— Name —", role:"Class President",     nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-2", name:"— Name —", role:"Vice President",      nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-3", name:"— Name —", role:"Financial Officer",   nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"vip-1", name:"Somchai Rakdee",    role:"Class President",   nickname:"Bank",  birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
+  { id:"vip-2", name:"— Name —",          role:"Vice President",    nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
+  { id:"vip-3", name:"— Name —",          role:"Financial Officer", nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
 ];
 
-/* REGULAR STUDENTS — 41 entries. Fill in name, nickname, etc. */
-const REGULAR_STUDENTS = Array.from({length:41},(_,i)=>({
-  id:`stu-${i+1}`, name:`— Student ${i+4} —`,
-  nickname:"—", birthday:"—", dream:"—", quote:"—"
-}));
-// To fill one: REGULAR_STUDENTS[0] = { id:"stu-1", name:"Somchai K.", nickname:"Bank", birthday:"Jan 1, 2007", dream:"Engineer", quote:"Never give up." };
+/* REGULAR STUDENTS — 41 entries. Copy the format of index 0. */
+const REGULAR_STUDENTS = [
+  { id:"stu-1",  name:"Nattapat Jaidee",   nickname:"Tong",  birthday:"July 22, 2007",    dream:"Doctor at Mahidol University",        quote:"Every day is a new chance." },
+  { id:"stu-2",  name:"— Student 5 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-3",  name:"— Student 6 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-4",  name:"— Student 7 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-5",  name:"— Student 8 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-6",  name:"— Student 9 —",     nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-7",  name:"— Student 10 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-8",  name:"— Student 11 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-9",  name:"— Student 12 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-10", name:"— Student 13 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-11", name:"— Student 14 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-12", name:"— Student 15 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-13", name:"— Student 16 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-14", name:"— Student 17 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-15", name:"— Student 18 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-16", name:"— Student 19 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-17", name:"— Student 20 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-18", name:"— Student 21 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-19", name:"— Student 22 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-20", name:"— Student 23 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-21", name:"— Student 24 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-22", name:"— Student 25 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-23", name:"— Student 26 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-24", name:"— Student 27 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-25", name:"— Student 28 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-26", name:"— Student 29 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-27", name:"— Student 30 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-28", name:"— Student 31 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-29", name:"— Student 32 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-30", name:"— Student 33 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-31", name:"— Student 34 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-32", name:"— Student 35 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-33", name:"— Student 36 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-34", name:"— Student 37 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-35", name:"— Student 38 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-36", name:"— Student 39 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-37", name:"— Student 40 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-38", name:"— Student 41 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-39", name:"— Student 42 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-40", name:"— Student 43 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+  { id:"stu-41", name:"— Student 44 —",    nickname:"—",     birthday:"—",                dream:"—",                                   quote:"—" },
+];
 
 /* TEACHER QUOTES */
 const TEACHER_QUOTES = [
@@ -426,24 +464,41 @@ const MESSAGES = [
   }
 })();
 
+// ── FIREBASE UPLOAD HELPER (all slots use this) ──
+async function fbUploadPhoto(storagePath, dbPath, file){
+  if(!window._firebaseReady) return null;
+  try{
+    const storRef = window._fbRef(window._fbStorage, storagePath);
+    await window._uploadBytes(storRef, file);
+    const url = await window._getDownloadURL(storRef);
+    await window._set(window._dbRef(window._fbDatabase, dbPath), url);
+    return url;
+  }catch(err){ console.warn('Firebase upload error:', err); return null; }
+}
+
+// ── APPLY PHOTO TO DOM SLOT ──
+function applyPhotoToSlot(slotId, url){
+  const cont = document.getElementById('photo-' + slotId);
+  if(!cont) return;
+  let img = cont.querySelector('img');
+  if(!img){ img = document.createElement('img'); cont.insertBefore(img, cont.firstChild); }
+  img.src = url;
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+  cont.querySelector('.ph-icon')?.remove();
+}
+
 // HERO UPLOAD
-document.getElementById('hero-file-input').addEventListener('change',async function(e){
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=async ev=>{
-    const img=document.getElementById('hero-img');
-    img.src=ev.target.result; img.style.display='block';
-    document.getElementById('hero-ph').style.display='none';
-    if(window._firebaseReady){
-      try{
-        const r=window._fbRef(window._fbStorage,'hero/cover.jpg');
-        await window._uploadBytes(r,file);
-        const url=await window._getDownloadURL(r);
-        await window._set(window._dbRef(window._fbDatabase,'hero/coverUrl'),url);
-      }catch(err){console.warn('FB:',err);}
-    }
+document.getElementById('hero-file-input').addEventListener('change', async function(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = document.getElementById('hero-img');
+    img.src = ev.target.result; img.style.display = 'block';
+    document.getElementById('hero-ph').style.display = 'none';
   };
   reader.readAsDataURL(file);
+  // Upload to Firebase in background
+  await fbUploadPhoto('hero/cover.jpg', 'photos/hero', file);
 });
 
 // ICON HELPERS
@@ -451,28 +506,18 @@ const personSVG=(sz='40px')=>`<svg class="ph-icon" style="width:${sz};height:${s
 const uploadSVG=`<svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="var(--deep)"><path d="M9 16h6v-6h4l-7-7-7 7h4z"/></svg>`;
 const starSVG=`<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--gold)"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`;
 
-// PHOTO UPLOAD
+// STUDENT PHOTO UPLOAD — shows preview instantly, saves to Firebase
 async function uploadStudentPhoto(id, input){
-  const file=input.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=async ev=>{
-    const cont=document.getElementById('photo-'+id); if(!cont) return;
-    let img=cont.querySelector('img');
-    if(!img){img=document.createElement('img');cont.insertBefore(img,cont.firstChild);}
-    img.src=ev.target.result; img.style.cssText='width:100%;height:100%;object-fit:cover;';
-    cont.querySelector('svg.ph-icon')?.remove();
-    if(window._firebaseReady){
-      try{
-        const ref=window._fbRef(window._fbStorage,`students/${id}.jpg`);
-        await window._uploadBytes(ref,file);
-        const url=await window._getDownloadURL(ref);
-        await window._set(window._dbRef(window._fbDatabase,`students/${id}/photoUrl`),url);
-      }catch(err){console.warn('FB:',err);}
-    }
-  };
+  const file = input.files[0]; if(!file) return;
+  // Instant local preview
+  const reader = new FileReader();
+  reader.onload = ev => applyPhotoToSlot(id, ev.target.result);
   reader.readAsDataURL(file);
+  // Upload to Firebase Storage + save URL to Realtime DB under photos/{id}
+  const url = await fbUploadPhoto(`students/${id}.jpg`, `photos/${id}`, file);
+  if(url) applyPhotoToSlot(id, url); // swap local blob with permanent URL
 }
-window.uploadStudentPhoto=uploadStudentPhoto;
+window.uploadStudentPhoto = uploadStudentPhoto;
 
 // BUILD VIP
 function buildVIP(){
@@ -617,28 +662,26 @@ function buildMessages(){
   });
 }
 
-// FIREBASE LOAD
+// FIREBASE LOAD — restores ALL photo slots (hero + VIP + regular students)
 async function loadFromFirebase(){
-  if(!window._firebaseReady)return;
+  if(!window._firebaseReady) return;
   try{
-    const heroSnap=await window._get(window._dbRef(window._fbDatabase,'hero/coverUrl'));
-    if(heroSnap.exists()){
-      const img=document.getElementById('hero-img');
-      img.src=heroSnap.val();img.style.display='block';
-      document.getElementById('hero-ph').style.display='none';
-    }
-    const studSnap=await window._get(window._dbRef(window._fbDatabase,'students'));
-    if(studSnap.exists()){
-      Object.entries(studSnap.val()).forEach(([id,val])=>{
-        if(!val.photoUrl)return;
-        const cont=document.getElementById('photo-'+id);if(!cont)return;
-        let img=cont.querySelector('img');
-        if(!img){img=document.createElement('img');cont.insertBefore(img,cont.firstChild);}
-        img.src=val.photoUrl;img.style.cssText='width:100%;height:100%;object-fit:cover;';
-        cont.querySelector('.ph-icon')?.remove();
-      });
-    }
-  }catch(err){console.warn('Firebase load:',err);}
+    // Load all saved photos from one DB path: photos/{slotId}
+    const snap = await window._get(window._dbRef(window._fbDatabase, 'photos'));
+    if(!snap.exists()) return;
+    const data = snap.val();
+    Object.entries(data).forEach(([id, url]) => {
+      if(id === 'hero'){
+        // Restore hero cover
+        const img = document.getElementById('hero-img');
+        if(img){ img.src = url; img.style.display = 'block'; }
+        document.getElementById('hero-ph')?.style.setProperty('display','none');
+      } else {
+        // Restore any student photo slot (vip-1, vip-2, vip-3, stu-1 … stu-41)
+        applyPhotoToSlot(id, url);
+      }
+    });
+  }catch(err){ console.warn('Firebase load error:', err); }
 }
 
 // INIT
