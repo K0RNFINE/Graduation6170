@@ -82,16 +82,18 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 /* ── MUSIC PLAYER ── */
 #music-player{
   position:fixed;bottom:28px;right:28px;z-index:500;
-  display:flex;align-items:center;gap:10px;
-  background:rgba(26,22,16,.9);
+  background:rgba(26,22,16,.95);
   border:1px solid rgba(201,168,76,.2);
-  border-radius:40px;
-  padding:10px 18px 10px 12px;
+  border-radius:20px;
+  padding:10px 16px 10px 12px;
   backdrop-filter:blur(12px);
   box-shadow:0 4px 24px rgba(0,0,0,.5);
-  transition:all .3s;
+  transition:border-color .3s;
+  min-width:200px;
+  max-width:280px;
 }
 #music-player:hover{border-color:rgba(201,168,76,.4);}
+#music-bar{display:flex;align-items:center;gap:10px;}
 
 #music-toggle{
   width:36px;height:36px;border-radius:50%;
@@ -103,11 +105,11 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 #music-toggle:hover{transform:scale(1.08);}
 #music-toggle svg{width:14px;height:14px;fill:var(--deep);}
 
-.music-info{display:flex;flex-direction:column;gap:1px;}
+.music-info{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0;}
 .music-title{
   font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;
   letter-spacing:2px;color:var(--gold-light);text-transform:uppercase;
-  max-width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
 }
 .music-status{
   font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;
@@ -120,7 +122,6 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
   background:conic-gradient(#1a1610 0deg,#2a2318 60deg,#1a1610 120deg,#2a2318 180deg,#1a1610 240deg,#2a2318 300deg,#1a1610 360deg);
   border:2px solid var(--gold-dim);
   position:relative;flex-shrink:0;
-  transition:animation .3s;
 }
 .music-vinyl::after{
   content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -128,6 +129,32 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 }
 .music-vinyl.spinning{animation:vinylSpin 2s linear infinite;}
 @keyframes vinylSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* playlist panel */
+#playlist-panel::-webkit-scrollbar{width:3px;}
+#playlist-panel::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+.pl-item{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 4px;border-radius:4px;cursor:pointer;
+  transition:background .2s;
+}
+.pl-item:hover{background:rgba(201,168,76,.08);}
+.pl-item.active{background:rgba(201,168,76,.12);}
+.pl-num{
+  font-family:'Montserrat',sans-serif;font-size:8px;
+  color:var(--gold-dim);width:16px;text-align:right;flex-shrink:0;
+}
+.pl-name{
+  font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:1px;
+  color:var(--text-dim);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+.pl-item.active .pl-name{color:var(--gold-light);}
+.pl-playing-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--gold);
+  flex-shrink:0;opacity:0;
+}
+.pl-item.active .pl-playing-dot{opacity:1;animation:dotPulse 1s infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 
 /* ── HERO ── */
 #hero{position:relative;width:100%;height:100vh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
@@ -278,8 +305,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
   .students-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px;}
   .blackboard{padding:30px 20px;}
   .cd-num{font-size:60px;}
-  #music-player{bottom:16px;right:16px;padding:8px 14px 8px 10px;}
-  .music-title{max-width:80px;}
+  #music-player{bottom:16px;right:16px;padding:8px 12px;min-width:160px;max-width:220px;}
   .welcome-box{padding:36px 24px;}
 }
 </style>
@@ -324,29 +350,26 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 
 <!-- ══ MUSIC PLAYER ══ -->
 <div id="music-player">
-  <div class="music-vinyl" id="vinyl"></div>
-  <button id="music-toggle" title="Play / Pause">
-    <!-- shows pause icon when playing, play icon when paused -->
-    <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    <svg id="icon-play"  viewBox="0 0 24 24" style="display:none"><path d="M8 5v14l11-7z"/></svg>
-  </button>
-  <div class="music-info">
-    <!-- ✏️ EDIT: Song name shown in player -->
-    <div class="music-title">— Song Title —</div>
-    <div class="music-status" id="music-status">Playing</div>
+  <div id="music-bar" style="display:flex;align-items:center;gap:10px;cursor:pointer;" title="Click to expand playlist">
+    <div class="music-vinyl" id="vinyl"></div>
+    <button id="music-toggle" title="Play / Pause" onclick="event.stopPropagation()">
+      <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <svg id="icon-play"  viewBox="0 0 24 24" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="music-info">
+      <div class="music-title" id="music-title-el">— Loading —</div>
+      <div class="music-status" id="music-status">Playing</div>
+    </div>
+    <svg id="music-chevron" viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--gold-dim);stroke-width:2;transition:transform .3s;flex-shrink:0;"><polyline points="18 15 12 9 6 15"/></svg>
+  </div>
+  <!-- Expanded playlist panel -->
+  <div id="playlist-panel" style="display:none;margin-top:12px;border-top:1px solid rgba(201,168,76,.15);padding-top:12px;max-height:200px;overflow-y:auto;">
+    <div id="playlist-items"></div>
   </div>
 </div>
 
-<!-- ══ HIDDEN AUDIO ══ -->
-<!-- ✏️ EDIT: set your two song filenames below -->
-<!-- ✏️ EDIT: set SONG_SWITCH_HOUR in the music config in the <script> below -->
-<audio id="bg-audio-1" loop>
-  <source src="Rokudenashi - One voice Official music instrumental video.mp3" type="audio/mpeg"/>
-</audio>
-<audio id="bg-audio-2" loop>
-  <!-- ✏️ Replace with your second song filename -->
-  <source src="your-second-song.mp3" type="audio/mpeg"/>
-</audio>
+<!-- ══ HIDDEN AUDIO — controlled by playlist in JS below ══ -->
+<audio id="bg-audio"></audio>
 
 <!-- HERO -->
 <section id="hero">
@@ -487,7 +510,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 // ║           CONFIGURATION — Edit everything here       ║
 // ╚══════════════════════════════════════════════════════╝
 
-const HERO_IMAGE = "IMG_1022.jpeg";
+const HERO_IMAGE = "IMG_1125.png";
 const COUNTDOWN_TARGET = null;
 
 const TIMELINE_EVENTS = [
@@ -496,35 +519,30 @@ const TIMELINE_EVENTS = [
 ];
 
 const VIP_STUDENTS = [
-  { id:"vip-1", name:"— นภดล แสนมนตรี —",       role:"Financial Officer", photo:null, nickname:"นภ",   birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"Vice President",    photo:null, nickname:"หมอ",   birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-3", name:"- ญาณัจฉรา ตาคำ -", role:"Class President",   photo:null, nickname:"วุ้นเส้น", birthday:"-", dream:"-", quote:"-" },
-  { id:"vip-4", name:"— สินีนาถ เทพา —",       role:"Secretary", photo:null, nickname:"-",   birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-5", name:"— กานต์ชนิต โยธา —",       role:"Public Relation", photo:null, nickname:"วุ้นเส้น",   birthday:"—", dream:"—", quote:"—" },
-
-  
+  { id:"vip-1", name:"Somchai Rakdee", role:"Class President",   photo:null, nickname:"Bank", birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
+  { id:"vip-2", name:"— Name —",       role:"Vice President",    photo:null, nickname:"—",   birthday:"—", dream:"—", quote:"—" },
+  { id:"vip-3", name:"— Name —",       role:"Financial Officer", photo:null, nickname:"—",   birthday:"—", dream:"—", quote:"—" },
 ];
 
 const REGULAR_STUDENTS = [
   // ✏️ Change number:"XX" to whatever class number you want shown. Leave number:"" for blank.
-  { id:"stu-1",  number:"01", name:"- ฉัตรชกร ใจโปร่ง -",              photo:null, nickname:"กัส",     birthday:"-", dream:"-",  quote:"-" },
-  { id:"stu-2",  number:"02", name:"— ณัฐพงษ์ กันทพวงษ์ —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-3",  number:"03", name:"— แดนวุฒิวัชร์ —",                photo:null, nickname:"แดน",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-4",  number:"04", name:"— เอกรพี เสนแก้ว —",                photo:null, nickname:"เอก",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-5",  number:"07", name:"— วินัย อนันต์ธรภัทร —",                photo:null, nickname:"วินัย",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-6",  number:"08", name:"— ปวีณ์กร ถาตะนาน —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-6",  number:"09", name:"— ภัทรพล มูลก่ำ —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-7",  number:"10", name:"— พศวีร์ วงษ์ถา —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-8",  number:"11", name:"— ชฎิล คำพลอย —",               photo:null, nickname:"ชฎิล",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-1",  number:"04", name:"Nattapat Jaidee",              photo:null, nickname:"Tong",     birthday:"July 22, 2007", dream:"Doctor at Mahidol University",  quote:"Every day is a new chance." },
+  { id:"stu-2",  number:"05", name:"— Student 5 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-3",  number:"06", name:"— Student 6 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-4",  number:"07", name:"— Student 7 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-5",  number:"08", name:"— Student 8 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-6",  number:"09", name:"— Student 9 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-7",  number:"10", name:"— Student 10 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-8",  number:"11", name:"— Student 11 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
   { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",  photo:null, nickname:"กรณ์",     birthday:"April 06 2552", dream:"Software Engineer",             quote:"Nothing much just Hope we Meet again in the future -The Founder" },
-  { id:"stu-10", number:"13", name:"— ณัฐเดช ปลื้มสุดใจ —",               photo:null, nickname:"เพรช",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-11", number:"14", name:"— ณัฐวุฒิ ส่างน้อย —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",         photo:"att.geP7WsOagxp-j2ZFSkTQqZbdaCj-V2jnHQvoWY_jNvQ.jpeg", nickname:"เต้ย",     birthday:"—",             dream:"Math Teacher",                  quote:"—" },
-  { id:"stu-13", number:"16", name:"— นัทธวัฒน์ หอมพิกุล —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-14", number:"17", name:"— เอกภูมิ บัวยิ้ม —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-15", number:"18", name:"— ปฏิภาณ ป้อมยุคล —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-16", number:"19", name:"— ศิริภาพรรณ ใฝ่จัน —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-17", number:"20", name:"— สุทธิดา ขัดแพร่ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-10", number:"13", name:"— Student 13 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-11", number:"14", name:"— Student 14 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",         photo:null, nickname:"เต้ย",     birthday:"—",             dream:"Math Teacher",                  quote:"—" },
+  { id:"stu-13", number:"16", name:"— Student 16 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-14", number:"17", name:"— Student 17 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-15", number:"18", name:"— Student 18 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-16", number:"19", name:"— Student 19 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-17", number:"20", name:"— Student 20 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
   { id:"stu-18", number:"21", name:"— ธัญญาเรศ ยะวะ —",           photo:null, nickname:"มิ้ง",     birthday:"—",             dream:"—",                             quote:"—" },
   { id:"stu-19", number:"22", name:"— Student 22 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
   { id:"stu-20", number:"23", name:"— Student 23 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
@@ -561,7 +579,7 @@ const TEACHER_QUOTES = [
 ];
 
 const MESSAGES = [
-  { from:"— The Founder —", text:"Thank you for being part of these memories.May the future treat everyone well.And perhaps someday, our paths will cross again. — The Founder, Signed Out." },
+  { from:"— Name —", text:"Write your message to the class here. Something warm, funny, or heartfelt." },
   { from:"— Name —", text:"A farewell note. What do you want your classmates to remember?" },
   { from:"— Name —", text:"Leave your mark on this blackboard before we all go our separate ways." },
   { from:"— Name —", text:"A little wish, a little dream — placeholder for your words." },
@@ -576,55 +594,78 @@ const MESSAGES = [
 ];
 // ╚══════════════════════════════════════════════════════╝
 
-// ── WELCOME POPUP + MUSIC AUTOPLAY ──────────────────────
+// ══════════════════════════════════════════════════════
+// ██  MUSIC — PLAYLIST CONFIG  ████████████████████████
+// ══════════════════════════════════════════════════════
+// PLAYLIST_1 plays on loop until COUNTDOWN_TARGET is reached.
+// PLAYLIST_2 plays on loop after COUNTDOWN_TARGET is reached.
+// Each song: { file: "filename.mp3", title: "Display Title" }
+// Leave title as placeholder until you know the song names.
+
+const PLAYLIST_1 = [
+  { file: "Rokudenashi - One voice Official music instrumental video.mp3", title: "— One Voice (Instrumental) —" },
+  { file: "— song-2.mp3 —",  title: "— Song 2 Title —" },
+  { file: "— song-3.mp3 —",  title: "— Song 3 Title —" },
+  // Add more: { file: "mysong.mp3", title: "My Song" },
+];
+
+const PLAYLIST_2 = [
+  { file: "— celebration-1.mp3 —", title: "— Celebration Song 1 —" },
+  { file: "— celebration-2.mp3 —", title: "— Celebration Song 2 —" },
+  // Add more: { file: "party.mp3", title: "Party Song" },
+];
+// ══════════════════════════════════════════════════════
+
+// ── COOKIE ───────────────────────────────────────────
 const COOKIE_NAME = 'grad61_welcomed';
+function setCookie(n){ document.cookie=`${n}=1; path=/; SameSite=Lax`; }
+function getCookie(n){ return document.cookie.split(';').some(c=>c.trim().startsWith(n+'=')); }
 
-function setCookie(name){
-  // Session cookie — clears on full page refresh (tab close / F5)
-  // Change 'session' to a date string for a longer-lived cookie:
-  // e.g. expires=${new Date(Date.now()+86400000).toUTCString()}
-  document.cookie = `${name}=1; path=/; SameSite=Lax`;
+// ── PLAYER STATE ─────────────────────────────────────
+const audio      = document.getElementById('bg-audio');
+const vinyl      = document.getElementById('vinyl');
+const toggleBtn  = document.getElementById('music-toggle');
+const iconPlay   = document.getElementById('icon-play');
+const iconPause  = document.getElementById('icon-pause');
+const statusEl   = document.getElementById('music-status');
+const titleEl    = document.getElementById('music-title-el');
+const chevron    = document.getElementById('music-chevron');
+const plPanel    = document.getElementById('playlist-panel');
+const plItems    = document.getElementById('playlist-items');
+const musicBar   = document.getElementById('music-bar');
+
+audio.volume = 0.18;
+
+let currentPlaylist = [];
+let currentIdx = 0;
+let panelOpen = false;
+
+// Returns which playlist should be active right now
+function activePlaylist(){
+  if(!COUNTDOWN_TARGET) return PLAYLIST_1;
+  return new Date() >= new Date(COUNTDOWN_TARGET) ? PLAYLIST_2 : PLAYLIST_1;
 }
 
-function getCookie(name){
-  return document.cookie.split(';').some(c => c.trim().startsWith(name+'='));
+// Load a song by index into the audio element
+function loadSong(idx){
+  const pl = currentPlaylist;
+  if(!pl.length) return;
+  currentIdx = ((idx % pl.length) + pl.length) % pl.length;
+  audio.src = pl[currentIdx].file;
+  titleEl.textContent = pl[currentIdx].title;
+  updatePlaylistUI();
 }
 
-// ── MUSIC CONFIG ─────────────────────────────────────────
-// Song 2 plays automatically when COUNTDOWN_TARGET is reached.
-// If COUNTDOWN_TARGET is null, song 1 plays always.
-const SONG_1_TITLE = "— Song 1 Title —"; // ✏️ edit
-const SONG_2_TITLE = "— Song 2 Title —"; // ✏️ edit
-// ─────────────────────────────────────────────────────────
-
-const audio1   = document.getElementById('bg-audio-1');
-const audio2   = document.getElementById('bg-audio-2');
-const vinyl    = document.getElementById('vinyl');
-const toggleBtn= document.getElementById('music-toggle');
-const iconPlay = document.getElementById('icon-play');
-const iconPause= document.getElementById('icon-pause');
-const statusEl = document.getElementById('music-status');
-const titleEl  = document.querySelector('.music-title');
-
-audio1.volume = 0.18;
-audio2.volume = 0.18;
-
-// Returns true if the countdown target has passed
-function isPastCountdown(){
-  if(!COUNTDOWN_TARGET) return false;
-  return new Date() >= new Date(COUNTDOWN_TARGET);
+// Play specific track index
+function playSong(idx){
+  loadSong(idx);
+  audio.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false));
 }
 
-function getActiveAudio(){
-  return isPastCountdown() ? audio2 : audio1;
-}
-
-function updateTitle(){
-  titleEl.textContent = isPastCountdown() ? SONG_2_TITLE : SONG_1_TITLE;
-}
-
-let activeAudio = getActiveAudio();
-updateTitle();
+// Auto-advance to next song when current ends
+audio.addEventListener('ended', ()=>{
+  playSong(currentIdx + 1);
+});
 
 function setPlaying(playing){
   if(playing){
@@ -643,33 +684,74 @@ function setPlaying(playing){
 }
 
 function startMusic(){
-  activeAudio = getActiveAudio();
-  updateTitle();
-  activeAudio.play()
-    .then(()=> setPlaying(true))
-    .catch(()=> setPlaying(false));
+  // Check if we need to switch playlists
+  const pl = activePlaylist();
+  if(pl !== currentPlaylist){
+    currentPlaylist = pl;
+    currentIdx = 0;
+    buildPlaylistUI();
+  }
+  loadSong(currentIdx);
+  audio.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false));
 }
 
+// Play/pause toggle
 toggleBtn.addEventListener('click',()=>{
-  if(activeAudio.paused){ activeAudio.play(); setPlaying(true); }
-  else { activeAudio.pause(); setPlaying(false); }
+  if(audio.paused){ audio.play(); setPlaying(true); }
+  else { audio.pause(); setPlaying(false); }
 });
 
-// Check every second — same tick as countdown — switch song exactly when target hits
-if(COUNTDOWN_TARGET){
-  setInterval(()=>{
-    const shouldBe = getActiveAudio();
-    if(shouldBe !== activeAudio){
-      const wasPlaying = !activeAudio.paused;
-      activeAudio.pause();
-      activeAudio = shouldBe;
-      updateTitle();
-      if(wasPlaying) activeAudio.play().then(()=>setPlaying(true));
-    }
-  }, 1000);
+// Expand/collapse playlist panel
+musicBar.addEventListener('click',()=>{
+  panelOpen = !panelOpen;
+  plPanel.style.display = panelOpen ? 'block' : 'none';
+  chevron.style.transform = panelOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+});
+
+// Build the playlist panel items (read-only, click to jump to that song)
+function buildPlaylistUI(){
+  plItems.innerHTML = '';
+  currentPlaylist.forEach((song, i) => {
+    const row = document.createElement('div');
+    row.className = 'pl-item' + (i === currentIdx ? ' active' : '');
+    row.dataset.idx = i;
+    row.innerHTML = `
+      <div class="pl-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="pl-name">${song.title}</div>
+      <div class="pl-playing-dot"></div>`;
+    row.addEventListener('click', e => {
+      e.stopPropagation();
+      playSong(i);
+    });
+    plItems.appendChild(row);
+  });
 }
 
-// Welcome popup logic
+function updatePlaylistUI(){
+  document.querySelectorAll('.pl-item').forEach((el,i)=>{
+    el.classList.toggle('active', i === currentIdx);
+  });
+}
+
+// Check every second for playlist switch (countdown hits zero)
+let _lastPlaylist = null;
+setInterval(()=>{
+  const pl = activePlaylist();
+  if(pl !== _lastPlaylist){
+    _lastPlaylist = pl;
+    if(pl !== currentPlaylist){
+      const wasPlaying = !audio.paused;
+      audio.pause();
+      currentPlaylist = pl;
+      currentIdx = 0;
+      buildPlaylistUI();
+      loadSong(0);
+      if(wasPlaying) audio.play().then(()=>setPlaying(true));
+    }
+  }
+}, 1000);
+
+// ── WELCOME POPUP ─────────────────────────────────────
 const overlay = document.getElementById('welcome-overlay');
 const enterBtn = document.getElementById('welcome-btn');
 
@@ -677,23 +759,28 @@ function dismissWelcome(){
   setCookie(COOKIE_NAME);
   overlay.classList.add('hiding');
   setTimeout(()=>{ overlay.style.display='none'; }, 500);
+  currentPlaylist = activePlaylist();
+  _lastPlaylist = currentPlaylist;
+  buildPlaylistUI();
   startMusic();
 }
-
 enterBtn.addEventListener('click', dismissWelcome);
 
-// If cookie already set — skip popup and auto-resume music
+// Skip popup if already seen this session
 if(getCookie(COOKIE_NAME)){
-  overlay.style.display = 'none';
-  // Resume automatically if they were playing before the refresh
+  overlay.style.display='none';
+  currentPlaylist = activePlaylist();
+  _lastPlaylist = currentPlaylist;
+  buildPlaylistUI();
   const wasPlaying = sessionStorage.getItem('musicPlaying');
   if(wasPlaying === '1' || wasPlaying === null){
-    startMusic(); // null = first time after cookie skip, play anyway
+    startMusic();
   } else {
+    loadSong(0);
     setPlaying(false);
   }
 }
-// ────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
 
 // PARTICLES
 (()=>{
