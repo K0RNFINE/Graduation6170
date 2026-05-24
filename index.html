@@ -302,8 +302,8 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 
     <!-- ✏️ EDIT: Welcome message -->
     <p class="welcome-sub">
-      — Welcome Everyone —<br>
-      Welcome to Memory page where our Journey is being Preserved here through out the time as M.6/1
+      — Your welcome message goes here —<br>
+      Something beautiful for your classmates to read when they first arrive.
     </p>
 
     <div class="welcome-divider">
@@ -436,7 +436,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
       <div class="cd-extra-unit"><div class="cd-extra-num" id="cd-M">—</div><div class="cd-extra-label">Months</div></div>
       <div class="cd-extra-unit"><div class="cd-extra-num" id="cd-D">—</div><div class="cd-extra-label">Days</div></div>
     </div>
-    <p class="cd-target-info" id="cd-info">Till Graduation.</p>
+    <p class="cd-target-info" id="cd-info">Set a target date to begin the countdown…</p>
   </div>
 </section>
 
@@ -487,8 +487,8 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 // ║           CONFIGURATION — Edit everything here       ║
 // ╚══════════════════════════════════════════════════════╝
 
-const HERO_IMAGE = "IMG_1022.jpeg";
-const COUNTDOWN_TARGET = "2027-04-01T09:00:00";
+const HERO_IMAGE = "IMG_1125.png";
+const COUNTDOWN_TARGET = null;
 
 const TIMELINE_EVENTS = [
   { date:"2026-05-18", title:"— The First Semester Begin —",    description:"First day of new Semester",               mediaUrl:"att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg", mediaType:"image" },
@@ -499,52 +499,51 @@ const VIP_STUDENTS = [
   { id:"vip-1", name:"Somchai Rakdee", role:"Class President",   photo:null, nickname:"Bank", birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
   { id:"vip-2", name:"— Name —",       role:"Vice President",    photo:null, nickname:"—",   birthday:"—", dream:"—", quote:"—" },
   { id:"vip-3", name:"— Name —",       role:"Financial Officer", photo:null, nickname:"—",   birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-22", name:"— กานต์ชนิต โยธา —", role:"Public Relation", photo:null, nickname:"วุ้นเส้น", birthday:"—", dream:"—", quote:"—" },
-  
 ];
 
 const REGULAR_STUDENTS = [
-  { id:"stu-1",  name:"Nattapat Jaidee", photo:null, nickname:"Tong", birthday:"July 22, 2007", dream:"Doctor at Mahidol University", quote:"Every day is a new chance." },
-  { id:"stu-2",  name:"— Student 5 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-3",  name:"— Student 6 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-4",  name:"— Student 7 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-5",  name:"— Student 8 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-6",  name:"— Student 9 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-7",  name:"— Student 10 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-8",  name:"— Student 11 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-9",  name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —", photo:null, nickname:"กรณ์", birthday:"April 06 2552", dream:"Software Engineer", quote:"Nothing much just Hope we Meet again in the future -The Founder" },
-  { id:"stu-10", name:"— Student 13 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-11", name:"— Student 14 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-12", name:"— ธรดล โสภาพันธุ์ —", photo:null, nickname:"เต้ย", birthday:"—", dream:"Math Teacher", quote:"—" },
-  { id:"stu-13", name:"— Student 16 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-14", name:"— Student 17 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-15", name:"— Student 18 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-16", name:"— Student 19 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-17", name:"— Student 20 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-18", name:"— ธัญญาเรศ ยะวะ —", photo:null, nickname:"มิ้ง", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-19", name:"— Student 22 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-20", name:"— Student 23 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-21", name:"— Student 24 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-
-  { id:"stu-23", name:"— Student 26 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-24", name:"— Student 27 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-25", name:"— Student 28 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-26", name:"— Student 29 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-27", name:"— Student 30 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-28", name:"— ชาญณภัทร ยลธรรธรรม —", photo:null, nickname:"น้ำมนต์", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-29", name:"— Student 32 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-30", name:"— Student 33 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-31", name:"— Student 34 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-32", name:"— ภูวิศา สมครอง —", photo:null, nickname:"อุดหนุน", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-33", name:"— รดา หลวงตุ้ย —", photo:null, nickname:"ฮาร์ป", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-34", name:"— Student 37 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-35", name:"— Student 38 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-36", name:"— Student 39 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-37", name:"— Student 40 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-38", name:"— Student 41 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-39", name:"— Student 42 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-40", name:"— Student 43 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
-  { id:"stu-41", name:"— Student 44 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  // ✏️ Change number:"XX" to whatever class number you want shown. Leave number:"" for blank.
+  { id:"stu-1",  number:"04", name:"Nattapat Jaidee",              photo:null, nickname:"Tong",     birthday:"July 22, 2007", dream:"Doctor at Mahidol University",  quote:"Every day is a new chance." },
+  { id:"stu-2",  number:"05", name:"— Student 5 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-3",  number:"06", name:"— Student 6 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-4",  number:"07", name:"— Student 7 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-5",  number:"08", name:"— Student 8 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-6",  number:"09", name:"— Student 9 —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-7",  number:"10", name:"— Student 10 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-8",  number:"11", name:"— Student 11 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",  photo:null, nickname:"กรณ์",     birthday:"April 06 2552", dream:"Software Engineer",             quote:"Nothing much just Hope we Meet again in the future -The Founder" },
+  { id:"stu-10", number:"13", name:"— Student 13 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-11", number:"14", name:"— Student 14 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",         photo:null, nickname:"เต้ย",     birthday:"—",             dream:"Math Teacher",                  quote:"—" },
+  { id:"stu-13", number:"16", name:"— Student 16 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-14", number:"17", name:"— Student 17 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-15", number:"18", name:"— Student 18 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-16", number:"19", name:"— Student 19 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-17", number:"20", name:"— Student 20 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-18", number:"21", name:"— ธัญญาเรศ ยะวะ —",           photo:null, nickname:"มิ้ง",     birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-19", number:"22", name:"— Student 22 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-20", number:"23", name:"— Student 23 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-21", number:"24", name:"— Student 24 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-22", number:"25", name:"— Student 25 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-23", number:"26", name:"— Student 26 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-24", number:"27", name:"— Student 27 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-25", number:"28", name:"— Student 28 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-26", number:"29", name:"— Student 29 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-27", number:"30", name:"— Student 30 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-28", number:"31", name:"— ชาญณภัทร ยลธรรธรรม —",      photo:null, nickname:"น้ำมนต์",  birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-29", number:"32", name:"— Student 32 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-30", number:"33", name:"— Student 33 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-31", number:"34", name:"— Student 34 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-32", number:"35", name:"— ภูวิศา สมครอง —",           photo:null, nickname:"อุดหนุน",  birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-33", number:"36", name:"— รดา หลวงตุ้ย —",            photo:null, nickname:"ฮาร์ป",   birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-34", number:"37", name:"— Student 37 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-35", number:"38", name:"— Student 38 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-36", number:"39", name:"— Student 39 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-37", number:"40", name:"— Student 40 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-38", number:"41", name:"— Student 41 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-39", number:"42", name:"— Student 42 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-40", number:"43", name:"— Student 43 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-41", number:"44", name:"— Student 44 —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
 ];
 
 const TEACHER_QUOTES = [
@@ -557,7 +556,7 @@ const TEACHER_QUOTES = [
 ];
 
 const MESSAGES = [
-  { from:"— The Founder —", text:"Hope everyone happy and will meet again in the future." },
+  { from:"— Name —", text:"Write your message to the class here. Something warm, funny, or heartfelt." },
   { from:"— Name —", text:"A farewell note. What do you want your classmates to remember?" },
   { from:"— Name —", text:"Leave your mark on this blackboard before we all go our separate ways." },
   { from:"— Name —", text:"A little wish, a little dream — placeholder for your words." },
@@ -589,7 +588,7 @@ function getCookie(name){
 // ── MUSIC CONFIG ─────────────────────────────────────────
 // Song 2 plays automatically when COUNTDOWN_TARGET is reached.
 // If COUNTDOWN_TARGET is null, song 1 plays always.
-const SONG_1_TITLE = "— One Voice (Instrumental) —"; // ✏️ edit
+const SONG_1_TITLE = "— Song 1 Title —"; // ✏️ edit
 const SONG_2_TITLE = "— Song 2 Title —"; // ✏️ edit
 // ─────────────────────────────────────────────────────────
 
@@ -731,7 +730,7 @@ function buildRegular(){
   REGULAR_STUDENTS.forEach((s,i)=>{
     const div=document.createElement('div');
     div.className='student-card';
-    div.innerHTML=`<div class="student-photo">${photoOrPh(s.photo,'30px')}</div><div class="student-number">No. ${String(i+4).padStart(2,'0')}</div><div class="student-name">${s.name}</div><div class="student-nickname">${s.nickname!=='—'?s.nickname:''}</div>`;
+    div.innerHTML=`<div class="student-photo">${photoOrPh(s.photo,'30px')}</div><div class="student-number">${s.number?'No. '+s.number:''}</div><div class="student-name">${s.name}</div><div class="student-nickname">${s.nickname!=='—'?s.nickname:''}</div>`;
     div.addEventListener('click',()=>openModal(s,false));
     grid.appendChild(div);
   });
