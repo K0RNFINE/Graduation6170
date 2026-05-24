@@ -303,7 +303,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
     <!-- ✏️ EDIT: Welcome message -->
     <p class="welcome-sub">
       — Welcome Everyone —<br>
-       This page is Made to preserved Our Memory as M.6/1 Feel free to Explore.
+      Welcome to Memory page where our Journey is being Preserved here through out the time as M.6/1
     </p>
 
     <div class="welcome-divider">
@@ -436,7 +436,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
       <div class="cd-extra-unit"><div class="cd-extra-num" id="cd-M">—</div><div class="cd-extra-label">Months</div></div>
       <div class="cd-extra-unit"><div class="cd-extra-num" id="cd-D">—</div><div class="cd-extra-label">Days</div></div>
     </div>
-    <p class="cd-target-info" id="cd-info">Set a target date to begin the countdown…</p>
+    <p class="cd-target-info" id="cd-info">Till Graduation.</p>
   </div>
 </section>
 
@@ -488,7 +488,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 // ╚══════════════════════════════════════════════════════╝
 
 const HERO_IMAGE = "IMG_1125.png";
-const COUNTDOWN_TARGET = null;
+const COUNTDOWN_TARGET = "2027-04-01T09:00:00";
 
 const TIMELINE_EVENTS = [
   { date:"2026-05-18", title:"— The First Semester Begin —",    description:"First day of new Semester",               mediaUrl:"att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg", mediaType:"image" },
@@ -585,11 +585,9 @@ function getCookie(name){
 }
 
 // ── MUSIC CONFIG ─────────────────────────────────────────
-// Hour (0–23) to switch from song 1 → song 2. Uses visitor's local time.
-// e.g. 18 = switch at 6:00 PM. Set to null to always play song 1.
-const SONG_SWITCH_HOUR = null; // ✏️ e.g. 18
-// Song titles shown in the player
-const SONG_1_TITLE = "— Song 1 Title —"; // ✏️ edit
+// Song 2 plays automatically when COUNTDOWN_TARGET is reached.
+// If COUNTDOWN_TARGET is null, song 1 plays always.
+const SONG_1_TITLE = "— One Voice (Instrumental) —"; // ✏️ edit
 const SONG_2_TITLE = "— Song 2 Title —"; // ✏️ edit
 // ─────────────────────────────────────────────────────────
 
@@ -605,15 +603,18 @@ const titleEl  = document.querySelector('.music-title');
 audio1.volume = 0.18;
 audio2.volume = 0.18;
 
-// Pick which song to use based on current hour
+// Returns true if the countdown target has passed
+function isPastCountdown(){
+  if(!COUNTDOWN_TARGET) return false;
+  return new Date() >= new Date(COUNTDOWN_TARGET);
+}
+
 function getActiveAudio(){
-  if(SONG_SWITCH_HOUR !== null && new Date().getHours() >= SONG_SWITCH_HOUR) return audio2;
-  return audio1;
+  return isPastCountdown() ? audio2 : audio1;
 }
 
 function updateTitle(){
-  const isSong2 = SONG_SWITCH_HOUR !== null && new Date().getHours() >= SONG_SWITCH_HOUR;
-  titleEl.textContent = isSong2 ? SONG_2_TITLE : SONG_1_TITLE;
+  titleEl.textContent = isPastCountdown() ? SONG_2_TITLE : SONG_1_TITLE;
 }
 
 let activeAudio = getActiveAudio();
@@ -648,8 +649,8 @@ toggleBtn.addEventListener('click',()=>{
   else { activeAudio.pause(); setPlaying(false); }
 });
 
-// Auto-switch song at the configured hour (checks every minute)
-if(SONG_SWITCH_HOUR !== null){
+// Check every second — same tick as countdown — switch song exactly when target hits
+if(COUNTDOWN_TARGET){
   setInterval(()=>{
     const shouldBe = getActiveAudio();
     if(shouldBe !== activeAudio){
@@ -659,7 +660,7 @@ if(SONG_SWITCH_HOUR !== null){
       updateTitle();
       if(wasPlaying) activeAudio.play().then(()=>setPlaying(true));
     }
-  }, 60000);
+  }, 1000);
 }
 
 // Welcome popup logic
