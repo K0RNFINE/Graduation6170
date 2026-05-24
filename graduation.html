@@ -12,7 +12,124 @@ html{scroll-behavior:smooth;}
 body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--dark);}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
 
-/* HERO */
+/* ── WELCOME POPUP ── */
+#welcome-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.92);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  animation:fadeInOverlay .6s ease;
+}
+@keyframes fadeInOverlay{from{opacity:0;}to{opacity:1;}}
+#welcome-overlay.hiding{animation:fadeOutOverlay .5s ease forwards;}
+@keyframes fadeOutOverlay{from{opacity:1;}to{opacity:0;pointer-events:none;}}
+
+.welcome-box{
+  max-width:520px;width:100%;
+  background:var(--dark);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:8px;
+  padding:52px 44px;
+  text-align:center;
+  position:relative;
+  animation:welcomeIn .7s cubic-bezier(.22,1,.36,1);
+}
+@keyframes welcomeIn{from{opacity:0;transform:translateY(30px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+
+.welcome-orn{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:20px;}
+.welcome-orn-line{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.welcome-orn-line.r{background:linear-gradient(90deg,var(--gold),transparent);}
+.welcome-orn svg{width:20px;height:20px;fill:var(--gold);}
+
+.welcome-label{
+  font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold-dim);margin-bottom:14px;
+}
+.welcome-title{
+  font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,46px);font-weight:900;
+  color:var(--cream);line-height:1.1;margin-bottom:8px;
+}
+.welcome-title span{color:var(--gold);font-style:italic;}
+.welcome-sub{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,20px);font-style:italic;
+  font-weight:300;color:var(--text-dim);margin-bottom:32px;line-height:1.6;
+}
+.welcome-divider{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:32px;}
+.welcome-divider-line{flex:1;max-width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim));}
+.welcome-divider-line.r{background:linear-gradient(90deg,var(--gold-dim),transparent);}
+.welcome-divider svg{width:14px;height:14px;fill:var(--gold);opacity:.6;}
+
+.welcome-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 36px;
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+  color:var(--deep);
+  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  border:none;border-radius:3px;cursor:pointer;
+  box-shadow:0 4px 24px rgba(201,168,76,.3);
+  transition:all .3s;
+}
+.welcome-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,.5);}
+.welcome-btn svg{width:16px;height:16px;fill:var(--deep);}
+
+.welcome-note{
+  margin-top:18px;
+  font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;
+  color:var(--gold-dim);opacity:.6;
+}
+
+/* ── MUSIC PLAYER ── */
+#music-player{
+  position:fixed;bottom:28px;right:28px;z-index:500;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(26,22,16,.9);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:40px;
+  padding:10px 18px 10px 12px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 4px 24px rgba(0,0,0,.5);
+  transition:all .3s;
+}
+#music-player:hover{border-color:rgba(201,168,76,.4);}
+
+#music-toggle{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:transform .2s;
+}
+#music-toggle:hover{transform:scale(1.08);}
+#music-toggle svg{width:14px;height:14px;fill:var(--deep);}
+
+.music-info{display:flex;flex-direction:column;gap:1px;}
+.music-title{
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;
+  letter-spacing:2px;color:var(--gold-light);text-transform:uppercase;
+  max-width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+.music-status{
+  font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;
+  color:var(--text-dim);
+}
+
+/* vinyl spin animation */
+.music-vinyl{
+  width:28px;height:28px;border-radius:50%;
+  background:conic-gradient(#1a1610 0deg,#2a2318 60deg,#1a1610 120deg,#2a2318 180deg,#1a1610 240deg,#2a2318 300deg,#1a1610 360deg);
+  border:2px solid var(--gold-dim);
+  position:relative;flex-shrink:0;
+  transition:animation .3s;
+}
+.music-vinyl::after{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:6px;height:6px;border-radius:50%;background:var(--gold);
+}
+.music-vinyl.spinning{animation:vinylSpin 2s linear infinite;}
+@keyframes vinylSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* ── HERO ── */
 #hero{position:relative;width:100%;height:100vh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
 #hero-bg{position:absolute;inset:0;background:#1a1610;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 #hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.55;}
@@ -161,15 +278,74 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
   .students-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px;}
   .blackboard{padding:30px 20px;}
   .cd-num{font-size:60px;}
+  #music-player{bottom:16px;right:16px;padding:8px 14px 8px 10px;}
+  .music-title{max-width:80px;}
+  .welcome-box{padding:36px 24px;}
 }
 </style>
 </head>
 <body>
 
+<!-- ══ WELCOME POPUP ══ -->
+<div id="welcome-overlay">
+  <div class="welcome-box">
+    <div class="welcome-orn">
+      <div class="welcome-orn-line"></div>
+      <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <div class="welcome-orn-line r"></div>
+    </div>
+
+    <div class="welcome-label">M.6/1 · Class of 2026</div>
+
+    <!-- ✏️ EDIT: Welcome title -->
+    <h1 class="welcome-title">Welcome to Our<br><span>Memory Page</span></h1>
+
+    <!-- ✏️ EDIT: Welcome message -->
+    <p class="welcome-sub">
+      — Your welcome message goes here —<br>
+      Something beautiful for your classmates to read when they first arrive.
+    </p>
+
+    <div class="welcome-divider">
+      <div class="welcome-divider-line"></div>
+      <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <div class="welcome-divider-line r"></div>
+    </div>
+
+    <!-- ✏️ EDIT: Button text -->
+    <button class="welcome-btn" id="welcome-btn">
+      <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+      Enter &amp; Relive the Memories
+    </button>
+
+    <p class="welcome-note">♪ Background music will begin on entry</p>
+  </div>
+</div>
+
+<!-- ══ MUSIC PLAYER ══ -->
+<div id="music-player">
+  <div class="music-vinyl" id="vinyl"></div>
+  <button id="music-toggle" title="Play / Pause">
+    <!-- shows pause icon when playing, play icon when paused -->
+    <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    <svg id="icon-play"  viewBox="0 0 24 24" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <div class="music-info">
+    <!-- ✏️ EDIT: Song name shown in player -->
+    <div class="music-title">— Song Title —</div>
+    <div class="music-status" id="music-status">Playing</div>
+  </div>
+</div>
+
+<!-- ══ HIDDEN AUDIO ══ -->
+<!-- ✏️ EDIT: Replace "your-song.mp3" with your actual mp3 filename -->
+<audio id="bg-audio" loop>
+  <source src="your-song.mp3" type="audio/mpeg"/>
+</audio>
+
 <!-- HERO -->
 <section id="hero">
   <div id="hero-bg">
-    <!-- Set HERO_IMAGE in config below, or leave null for placeholder -->
     <div class="ph-wrap" id="hero-ph">
       <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
       <span>Cover Photo</span>
@@ -280,7 +456,7 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
   </div>
 </section>
 
-<!-- MODAL -->
+<!-- STUDENT MODAL -->
 <div class="modal-overlay" id="student-modal" onclick="closeModal(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('student-modal').classList.remove('active')">✕</button>
@@ -306,90 +482,64 @@ footer{background:var(--deep);text-align:center;padding:40px;border-top:1px soli
 // ║           CONFIGURATION — Edit everything here       ║
 // ╚══════════════════════════════════════════════════════╝
 
-// Hero cover photo — put filename here, e.g. "images/cover.jpg", or null for placeholder
 const HERO_IMAGE = "IMG_1125.png";
-
-// Countdown target — "YYYY-MM-DDTHH:MM:SS" or null for template dashes
 const COUNTDOWN_TARGET = null;
-// Example: const COUNTDOWN_TARGET = "2026-09-01T09:00:00";
 
-// ── TIMELINE EVENTS ──────────────────────────────────────
-// mediaUrl: path to your image/video file e.g. "images/may18.jpg"
-//           or null to show a placeholder box
-// mediaType: "image" or "video"
 const TIMELINE_EVENTS = [
-  {
-    date: "2026-05-18",
-    title: "— The First Semester Begin —",
-    description: "First day of new Semester",
-    mediaUrl: "att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg",
-    mediaType: "image"
-  },
-  {
-    date: "2026-05-22",
-    title: "— Completed First week cycle —",
-    description: "Go through all day on the week first time",
-    mediaUrl: "att.gRQr-4-Q0rF1WpEVHdc0jYlqWaI2j9whdsIu12ooON0.jpeg",
-    mediaType: "image"
-  },
-  // Add more events like this:
-  // { date: "2026-06-10", title: "Sports Day", description: "...", mediaUrl: "images/sports.jpg", mediaType: "image" },
+  { date:"2026-05-18", title:"— The First Semester Begin —",    description:"First day of new Semester",               mediaUrl:"att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg", mediaType:"image" },
+  { date:"2026-05-22", title:"— Completed First week cycle —",  description:"Go through all day on the week first time", mediaUrl:"att.gRQr-4-Q0rF1WpEVHdc0jYlqWaI2j9whdsIu12ooON0.jpeg", mediaType:"image" },
 ];
 
-// ── VIP STUDENTS (3 leaders) ─────────────────────────────
-// photo: filename e.g. "photos/bank.jpg", or null for placeholder silhouette
 const VIP_STUDENTS = [
-  { id:"vip-1", name:"Somchai Rakdee",  role:"Class President",   photo:null, nickname:"Bank",  birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
-  { id:"vip-2", name:"— Name —",        role:"Vice President",    photo:null, nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
-  { id:"vip-3", name:"— Name —",        role:"Financial Officer", photo:null, nickname:"—",     birthday:"—",              dream:"—",                                             quote:"—" },
+  { id:"vip-1", name:"Somchai Rakdee", role:"Class President",   photo:null, nickname:"Bank", birthday:"March 14, 2007", dream:"Wants to study Computer Engineering at Chula", quote:"Hard work beats talent when talent doesn't work hard." },
+  { id:"vip-2", name:"— Name —",       role:"Vice President",    photo:null, nickname:"—",   birthday:"—", dream:"—", quote:"—" },
+  { id:"vip-3", name:"— Name —",       role:"Financial Officer", photo:null, nickname:"—",   birthday:"—", dream:"—", quote:"—" },
 ];
 
-// ── REGULAR STUDENTS (41 students, numbered 4–44) ────────
 const REGULAR_STUDENTS = [
-  { id:"stu-1",  name:"Nattapat Jaidee",  photo:null, nickname:"Tong", birthday:"July 22, 2007",  dream:"Doctor at Mahidol University",  quote:"Every day is a new chance." },
-  { id:"stu-2",  name:"— Student 5 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-3",  name:"— Student 6 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-4",  name:"— Student 7 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-5",  name:"— Student 8 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-6",  name:"— Student 9 —",   photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-7",  name:"— Student 10 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-8",  name:"— Student 11 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-9",  name:"— Student 12 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-10", name:"— Student 13 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-11", name:"— Student 14 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-12", name:"— Student 15 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-13", name:"— Student 16 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-14", name:"— Student 17 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-15", name:"— Student 18 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-16", name:"— Student 19 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-17", name:"— Student 20 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-18", name:"— Student 21 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-19", name:"— Student 22 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-20", name:"— Student 23 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-21", name:"— Student 24 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-22", name:"— Student 25 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-23", name:"— Student 26 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-24", name:"— Student 27 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-25", name:"— Student 28 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-26", name:"— Student 29 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-27", name:"— Student 30 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-28", name:"— Student 31 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-29", name:"— Student 32 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-30", name:"— Student 33 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-31", name:"— Student 34 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-32", name:"— Student 35 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-33", name:"— Student 36 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-34", name:"— Student 37 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-35", name:"— Student 38 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-36", name:"— Student 39 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-37", name:"— Student 40 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-38", name:"— Student 41 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-39", name:"— Student 42 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-40", name:"— Student 43 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
-  { id:"stu-41", name:"— Student 44 —",  photo:null, nickname:"—",    birthday:"—",              dream:"—",                             quote:"—" },
+  { id:"stu-1",  name:"Nattapat Jaidee", photo:null, nickname:"Tong", birthday:"July 22, 2007", dream:"Doctor at Mahidol University", quote:"Every day is a new chance." },
+  { id:"stu-2",  name:"— Student 5 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-3",  name:"— Student 6 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-4",  name:"— Student 7 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-5",  name:"— Student 8 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-6",  name:"— Student 9 —",  photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-7",  name:"— Student 10 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-8",  name:"— Student 11 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-9",  name:"— Student 12 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-10", name:"— Student 13 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-11", name:"— Student 14 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-12", name:"— Student 15 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-13", name:"— Student 16 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-14", name:"— Student 17 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-15", name:"— Student 18 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-16", name:"— Student 19 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-17", name:"— Student 20 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-18", name:"— Student 21 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-19", name:"— Student 22 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-20", name:"— Student 23 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-21", name:"— Student 24 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-22", name:"— Student 25 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-23", name:"— Student 26 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-24", name:"— Student 27 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-25", name:"— Student 28 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-26", name:"— Student 29 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-27", name:"— Student 30 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-28", name:"— Student 31 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-29", name:"— Student 32 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-30", name:"— Student 33 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-31", name:"— Student 34 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-32", name:"— Student 35 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-33", name:"— Student 36 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-34", name:"— Student 37 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-35", name:"— Student 38 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-36", name:"— Student 39 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-37", name:"— Student 40 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-38", name:"— Student 41 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-39", name:"— Student 42 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-40", name:"— Student 43 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-41", name:"— Student 44 —", photo:null, nickname:"—", birthday:"—", dream:"—", quote:"—" },
 ];
 
-// ── TEACHER QUOTES ───────────────────────────────────────
 const TEACHER_QUOTES = [
   { name:"— Teacher Name —", subject:"Subject", quote:"Leave a beautiful message for the students here. Words that will inspire them long after they've left these halls." },
   { name:"— Teacher Name —", subject:"Subject", quote:"Fill this space with your heartfelt blessing and words of wisdom for our graduating class." },
@@ -399,7 +549,6 @@ const TEACHER_QUOTES = [
   { name:"— Teacher Name —", subject:"Subject", quote:"The greatest gift a teacher gives is the belief in a student's potential." },
 ];
 
-// ── MESSAGE WALL ─────────────────────────────────────────
 const MESSAGES = [
   { from:"— Name —", text:"Write your message to the class here. Something warm, funny, or heartfelt." },
   { from:"— Name —", text:"A farewell note. What do you want your classmates to remember?" },
@@ -414,8 +563,75 @@ const MESSAGES = [
   { from:"— Name —", text:"Keep in touch. Edit me with a real message." },
   { from:"— Name —", text:"Our story doesn't end here — this is just the prologue." },
 ];
-
 // ╚══════════════════════════════════════════════════════╝
+
+// ── WELCOME POPUP + MUSIC AUTOPLAY ──────────────────────
+const COOKIE_NAME = 'grad61_welcomed';
+
+function setCookie(name){
+  // Session cookie — clears on full page refresh (tab close / F5)
+  // Change 'session' to a date string for a longer-lived cookie:
+  // e.g. expires=${new Date(Date.now()+86400000).toUTCString()}
+  document.cookie = `${name}=1; path=/; SameSite=Lax`;
+}
+
+function getCookie(name){
+  return document.cookie.split(';').some(c => c.trim().startsWith(name+'='));
+}
+
+const audio    = document.getElementById('bg-audio');
+const vinyl    = document.getElementById('vinyl');
+const toggleBtn= document.getElementById('music-toggle');
+const iconPlay = document.getElementById('icon-play');
+const iconPause= document.getElementById('icon-pause');
+const statusEl = document.getElementById('music-status');
+
+// Set background volume — low so it feels ambient
+audio.volume = 0.18;
+
+function setPlaying(playing){
+  if(playing){
+    vinyl.classList.add('spinning');
+    iconPause.style.display='';
+    iconPlay.style.display='none';
+    statusEl.textContent='Playing';
+  } else {
+    vinyl.classList.remove('spinning');
+    iconPause.style.display='none';
+    iconPlay.style.display='';
+    statusEl.textContent='Paused';
+  }
+}
+
+function startMusic(){
+  audio.play().then(()=> setPlaying(true)).catch(()=> setPlaying(false));
+}
+
+toggleBtn.addEventListener('click',()=>{
+  if(audio.paused){ audio.play(); setPlaying(true); }
+  else { audio.pause(); setPlaying(false); }
+});
+
+// Welcome popup logic
+const overlay = document.getElementById('welcome-overlay');
+const enterBtn = document.getElementById('welcome-btn');
+
+function dismissWelcome(){
+  setCookie(COOKIE_NAME);
+  overlay.classList.add('hiding');
+  setTimeout(()=>{ overlay.style.display='none'; }, 500);
+  startMusic();
+}
+
+enterBtn.addEventListener('click', dismissWelcome);
+
+// If cookie already set this session, skip popup and play music
+if(getCookie(COOKIE_NAME)){
+  overlay.style.display = 'none';
+  // Still try autoplay (may work if user already interacted previously)
+  startMusic();
+}
+// ────────────────────────────────────────────────────────
 
 // PARTICLES
 (()=>{
@@ -437,11 +653,7 @@ if(HERO_IMAGE){
 
 // HELPERS
 const personSVG=(sz='40px')=>`<svg class="ph-icon" style="width:${sz};height:${sz}" viewBox="0 0 24 24" fill="var(--gold-dim)"><path opacity=".4" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>`;
-
-function photoOrPh(photoPath, sz){
-  if(photoPath) return `<img src="${photoPath}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/>`;
-  return personSVG(sz);
-}
+function photoOrPh(p,sz){ return p?`<img src="${p}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/>`:personSVG(sz); }
 
 // BUILD VIP
 function buildVIP(){
@@ -449,12 +661,7 @@ function buildVIP(){
   VIP_STUDENTS.forEach(s=>{
     const div=document.createElement('div');
     div.className='vip-card';
-    div.innerHTML=`
-      <div class="vip-ring">
-        <div class="vip-photo">${photoOrPh(s.photo,'40px')}</div>
-      </div>
-      <div class="vip-badge">${s.role}</div>
-      <div class="vip-name">${s.name}</div>`;
+    div.innerHTML=`<div class="vip-ring"><div class="vip-photo">${photoOrPh(s.photo,'40px')}</div></div><div class="vip-badge">${s.role}</div><div class="vip-name">${s.name}</div>`;
     div.addEventListener('click',()=>openModal(s,true));
     row.appendChild(div);
   });
@@ -466,11 +673,7 @@ function buildRegular(){
   REGULAR_STUDENTS.forEach((s,i)=>{
     const div=document.createElement('div');
     div.className='student-card';
-    div.innerHTML=`
-      <div class="student-photo">${photoOrPh(s.photo,'30px')}</div>
-      <div class="student-number">No. ${String(i+4).padStart(2,'0')}</div>
-      <div class="student-name">${s.name}</div>
-      <div class="student-nickname">${s.nickname!=='—'?s.nickname:''}</div>`;
+    div.innerHTML=`<div class="student-photo">${photoOrPh(s.photo,'30px')}</div><div class="student-number">No. ${String(i+4).padStart(2,'0')}</div><div class="student-name">${s.name}</div><div class="student-nickname">${s.nickname!=='—'?s.nickname:''}</div>`;
     div.addEventListener('click',()=>openModal(s,false));
     grid.appendChild(div);
   });
@@ -479,9 +682,7 @@ function buildRegular(){
 // MODAL
 function openModal(s,isVip){
   const ph=document.getElementById('modal-photo');
-  ph.innerHTML=s.photo
-    ?`<img src="${s.photo}" style="width:100%;height:100%;object-fit:cover;" onerror="this.replaceWith(${JSON.stringify(personSVG('50px'))})"/>`
-    :`${personSVG('50px')}`;
+  ph.innerHTML=s.photo?`<img src="${s.photo}" style="width:100%;height:100%;object-fit:cover;">`:`${personSVG('50px')}`;
   document.getElementById('modal-name').textContent=s.name;
   document.getElementById('modal-role').textContent=isVip?(s.role||'VIP'):'STUDENT';
   document.getElementById('modal-nickname').textContent=s.nickname||'—';
@@ -496,8 +697,7 @@ window.closeModal=closeModal;
 // TIMELINE
 let tlIdx=0;
 function buildTimeline(){
-  const slides=document.getElementById('tl-slides');
-  const dots=document.getElementById('tl-dots');
+  const slides=document.getElementById('tl-slides'),dots=document.getElementById('tl-dots');
   if(!TIMELINE_EVENTS.length){
     document.getElementById('tl-date-display').textContent='— No Events Yet —';
     slides.innerHTML=`<div class="event-slide active"><div class="event-media"><div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div></div><div class="event-info"><div class="event-date-tag">— Date TBD —</div><div class="event-title-txt">Event Name Placeholder</div><div class="event-desc">Configure events in the TIMELINE_EVENTS array.</div></div></div>`;
@@ -506,17 +706,10 @@ function buildTimeline(){
   TIMELINE_EVENTS.forEach((ev,i)=>{
     const slide=document.createElement('div');
     slide.className='event-slide'+(i===0?' active':'');
-    let media;
-    if(ev.mediaUrl){
-      media = ev.mediaType==='video'
-        ? `<video src="${ev.mediaUrl}" controls style="width:100%;height:100%;object-fit:cover;"></video>`
-        : `<img src="${ev.mediaUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div class=media-ph><svg viewBox=\'0 0 24 24\'><path d=\'M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z\'/></svg><span>Image not found</span></div>'"/>`;
-    } else {
-      media=`<div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div>`;
-    }
+    const media=ev.mediaUrl?(ev.mediaType==='video'?`<video src="${ev.mediaUrl}" controls style="width:100%;height:100%;object-fit:cover;"></video>`:`<img src="${ev.mediaUrl}" style="width:100%;height:100%;object-fit:cover;">`):
+      `<div class="media-ph"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span>Photo / Video</span></div>`;
     const d=new Date(ev.date);
-    const fmt=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    slide.innerHTML=`<div class="event-media">${media}</div><div class="event-info"><div class="event-date-tag">${fmt}</div><div class="event-title-txt">${ev.title}</div><div class="event-desc">${ev.description}</div></div>`;
+    slide.innerHTML=`<div class="event-media">${media}</div><div class="event-info"><div class="event-date-tag">${d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div><div class="event-title-txt">${ev.title}</div><div class="event-desc">${ev.description}</div></div>`;
     slides.appendChild(slide);
     const dot=document.createElement('div');
     dot.className='tl-dot'+(i===0?' active':'');
@@ -540,8 +733,7 @@ window.tlNav=tlNav;
 function buildQuotes(){
   const grid=document.getElementById('quotes-grid');
   TEACHER_QUOTES.forEach(q=>{
-    const c=document.createElement('div');
-    c.className='quote-card';
+    const c=document.createElement('div');c.className='quote-card';
     c.innerHTML=`<div class="quote-mark">"</div><div class="quote-text">${q.quote}</div><div class="quote-author"><div class="quote-avatar"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--gold-dim);opacity:.5"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg></div><div><div class="q-name">${q.name}</div><div class="q-subj">${q.subject}</div></div></div>`;
     grid.appendChild(c);
   });
@@ -554,8 +746,7 @@ function updateCountdown(){
   if(diff<=0){
     ['cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');
     ['cd-M','cd-D'].forEach(id=>document.getElementById(id).textContent='0');
-    document.getElementById('cd-info').textContent='🎓 Congratulations, Graduates!';
-    return;
+    document.getElementById('cd-info').textContent='🎓 Congratulations, Graduates!';return;
   }
   const tot=Math.floor(diff/1000);
   document.getElementById('cd-h').textContent=String(Math.floor(tot/3600)%24).padStart(2,'0');
@@ -573,8 +764,7 @@ function buildMessages(){
   const grid=document.getElementById('messages-grid');
   const rots=[-2,1,-1,2,0,-1.5,1.5,-2,.5,-.5,2,-1];
   MESSAGES.forEach((m,i)=>{
-    const c=document.createElement('div');
-    c.className='msg-card';
+    const c=document.createElement('div');c.className='msg-card';
     c.style.setProperty('--rot',rots[i%rots.length]+'deg');
     c.innerHTML=`<div class="msg-from">✦ ${m.from}</div><div class="msg-text">${m.text}</div>`;
     grid.appendChild(c);
@@ -582,11 +772,7 @@ function buildMessages(){
 }
 
 // INIT
-buildVIP();
-buildRegular();
-buildTimeline();
-buildQuotes();
-buildMessages();
+buildVIP();buildRegular();buildTimeline();buildQuotes();buildMessages();
 if(COUNTDOWN_TARGET){updateCountdown();setInterval(updateCountdown,1000);}
 </script>
 </body>
