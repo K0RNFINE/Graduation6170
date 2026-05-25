@@ -239,8 +239,13 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .tl-nav-btn:hover{background:rgba(201,168,76,.1);border-color:var(--gold);}
 .tl-nav-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;}
 .tl-date-display{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--cream);min-width:220px;text-align:center;}
-.tl-dots{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;}
-.tl-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--gold-dim);background:transparent;cursor:pointer;transition:all .2s;}
+.tl-dots-wrap{position:relative;max-width:360px;margin:0 auto;}
+.tl-dots-wrap::before,.tl-dots-wrap::after{content:'';position:absolute;top:0;bottom:0;width:44px;z-index:2;pointer-events:none;}
+.tl-dots-wrap::before{left:0;background:linear-gradient(90deg,var(--deep),transparent);}
+.tl-dots-wrap::after{right:0;background:linear-gradient(270deg,var(--deep),transparent);}
+.tl-dots{display:flex;gap:8px;align-items:center;overflow-x:auto;scroll-behavior:smooth;padding:4px 48px;scrollbar-width:none;}
+.tl-dots::-webkit-scrollbar{display:none;}
+.tl-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--gold-dim);background:transparent;cursor:pointer;transition:all .3s;flex-shrink:0;}
 .tl-dot.active{background:var(--gold);border-color:var(--gold);width:20px;border-radius:4px;}
 .event-slide{display:none;animation:slideIn .4s ease;}
 .event-slide.active{display:block;}
@@ -423,7 +428,7 @@ Please, feel free to explore as you wish
       <div class="tl-date-display" id="tl-date-display">— — —</div>
       <button class="tl-nav-btn" onclick="tlNav(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
-    <div class="tl-dots" id="tl-dots"></div>
+    <div class="tl-dots-wrap"><div class="tl-dots" id="tl-dots"></div></div>
     <div id="tl-slides" style="margin-top:36px;"></div>
   </div>
 </section>
@@ -516,60 +521,58 @@ const COUNTDOWN_TARGET = null;
 const TIMELINE_EVENTS = [
   { date:"2026-05-18", title:"— The First Semester Begin —",    description:"First day of new Semester",               mediaUrl:"att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg", mediaType:"image" },
   { date:"2026-05-22", title:"— Completed First week cycle —",  description:"Go through all day on the week first time", mediaUrl:"att.gRQr-4-Q0rF1WpEVHdc0jYlqWaI2j9whdsIu12ooON0.jpeg", mediaType:"image" },
-  { date:"2027-04-15", title:"— To be Continue —",  description:"To be Continue", mediaUrl:null, mediaType:"image" },
+  { date:"2027-04-15", title:"— To be Continue —",              description:"To be Continue",                           mediaUrl:null, mediaType:"image" },
 ];
 
 const VIP_STUDENTS = [
-  { id:"vip-1", name:"- ญาณัจฉรา ตาคำ -", role:"หัวหน้าห้อง no.33",   photo:"att.nXjacGDbJ3iIVtz3QWdhm1Z8k8YCvdBQ8MSTHbTFwHU.jpeg", nickname:"วุ้นเส้น", birthday:"-", dream:"-", quote:"-" },
-  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"รองหัวหน้าห้อง no.5",    photo:null, nickname:"ข้าวป้าง",   birthday:"—", dream:"ราชาโจรสลัด", quote:"สมบัติของฉันน่ะหรอฉันทิ้งไว้นั่นหมดแล้วอยากได้ก็ไปหาเอาสิ" },
-  { id:"vip-3", name:"— สินีนาถ เทพา —",       role:"เลขา no.27", photo:null, nickname:"-",   birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-4", name:"— นภดล แสนมนตรี —",       role:"เหรัญญิก no.6", photo:"att.ri-FT0GZn-Ys7pdoyI43TLoHnFkSpa3C8YriE7Zaoe4.jpeg", nickname:"นภ",   birthday:"—", dream:"—", quote:"—" },
-  { id:"vip-5", name:"— กานต์ชนิต โยธา —",       role:"ประชาสัมพันธ์ no.25", photo:null, nickname:"วุ้นเส้น",   birthday:"—", dream:"—", quote:"—" },
-
-  
+  { id:"vip-1", name:"- ญาณัจฉรา ตาคำ -",      role:"หัวหน้าห้อง no.33",       photo:"att.nXjacGDbJ3iIVtz3QWdhm1Z8k8YCvdBQ8MSTHbTFwHU.jpeg", nickname:"วุ้นเส้น", birthday:"-",  dream:"-",           quote:"-" },
+  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"รองหัวหน้าห้อง no.5",    photo:null, nickname:"ข้าวป้าง",   birthday:"—",  dream:"ราชาโจรสลัด", quote:"สมบัติของฉันน่ะหรอฉันทิ้งไว้นั่นหมดแล้วอยากได้ก็ไปหาเอาสิ" },
+  { id:"vip-3", name:"— สินีนาถ เทพา —",        role:"เลขา no.27",              photo:null, nickname:"-",          birthday:"—",  dream:"—",           quote:"—" },
+  { id:"vip-4", name:"— นภดล แสนมนตรี —",       role:"เหรัญญิก no.6",           photo:"att.ri-FT0GZn-Ys7pdoyI43TLoHnFkSpa3C8YriE7Zaoe4.jpeg", nickname:"นภ", birthday:"—", dream:"—", quote:"—" },
+  { id:"vip-5", name:"— กานต์ชนิต โยธา —",      role:"ประชาสัมพันธ์ no.25",    photo:null, nickname:"วุ้นเส้น",   birthday:"—",  dream:"—",           quote:"—" },
 ];
 
 const REGULAR_STUDENTS = [
   // ✏️ Change number:"XX" to whatever class number you want shown. Leave number:"" for blank.
-  { id:"stu-1",  number:"01", name:"- ฉัตรชกร ใจโปร่ง -",              photo:"att.yPCNM7IZrIagx74APk_dr1dbPoRdIBOoSlxr6YIbUsM.jpeg", nickname:"กัส",     birthday:"-", dream:"-",  quote:"-" },
-  { id:"stu-2",  number:"02", name:"— ณัฐพงษ์ กันทพวงษ์ —",                photo:"att.1Gq4V8a-6FwZZSlxuJmEsd-KIVuMSlttGavgeRSHBKM.jpeg", nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-3",  number:"03", name:"— แดนวุฒิวัชร์ —",                photo:null, nickname:"แดน",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-4",  number:"04", name:"— เอกรพี เสนแก้ว —",                photo:null, nickname:"เอก",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-5",  number:"07", name:"— วินัย อนันต์ธรภัทร —",                photo:null, nickname:"วินัย",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-6",  number:"08", name:"— ปวีณ์กร ถาตะนาน —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-6",  number:"09", name:"— ภัทรพล มูลก่ำ —",                photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-7",  number:"10", name:"— พศวีร์ วงษ์ถา —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-8",  number:"11", name:"— ชฎิล คำพลอย —",               photo:null, nickname:"ชฎิล",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",  photo:null, nickname:"กรณ์",     birthday:"April 06 2552", dream:"Software Engineer",             quote:"Nothing much just Hope we Meet again in the future -The Founder" },
-  { id:"stu-10", number:"13", name:"— ณัฐเดช ปลื้มสุดใจ —",               photo:null, nickname:"เพรช",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-11", number:"14", name:"— ณัฐวุฒิ ส่างน้อย —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",         photo:"att.geP7WsOagxp-j2ZFSkTQqZbdaCj-V2jnHQvoWY_jNvQ.jpeg", nickname:"เต้ย",     birthday:"—",             dream:"Math Teacher",                  quote:"—" },
-  { id:"stu-13", number:"16", name:"— นัทธวัฒน์ หอมพิกุล —",               photo:"att.TdYkMOvShDsTK59oLJc2-W5JLZOyu3LsGJ9FFPyLeE8.jpeg", nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-14", number:"17", name:"— เอกภูมิ บัวยิ้ม —",               photo:"att.J1m8tOb_saOGrHt0DTX8DN7GFhCl8AiP9MfZWHGHRAs.jpeg", nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-15", number:"18", name:"— ปฏิภาณ ป้อมยุคล —",               photo:null, nickname:"จีโน่",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-16", number:"19", name:"— ศิริภาพรรณ ใฝ่จัน —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-17", number:"20", name:"— สุทธิดา ขัดแพร่ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-18", number:"21", name:"— ธัญญาเรศ ยะวะ —",           photo:null, nickname:"มิ้ง",     birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-19", number:"22", name:"— นันทิศา พ่อเมืองแสนใจ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-20", number:"23", name:"— ณิชาภัทร ปัญโย —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-21", number:"24", name:"— สถาพร ปัดสา —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-23", number:"26", name:"— พัชรพร จำปาทิพย์ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-25", number:"28", name:"— สิริยากร ธรรมใจ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-26", number:"29", name:"— สุชาดา แสงเสนา —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-27", number:"30", name:"—ภัทรวรรณ ปันหล้า —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-28", number:"31", name:"— ชาญณภัทร ยลธรรธรรม —",      photo:null, nickname:"น้ำมนต์",  birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-29", number:"32", name:"— จิรัชญา ตาวตา —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-31", number:"34", name:"— ธนาภรณ์ ไชยเมืองชื่น —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-32", number:"35", name:"— ภูวิศา สมครอง —",           photo:null, nickname:"อุดหนุน",  birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-33", number:"36", name:"— รดา หลวงตุ้ย —",            photo:null, nickname:"ฮาร์ป",   birthday:"19/03/2008",             dream:"ayanokoji-kun",                             quote:"รักชิโนโนเมะ เอนะที่สุดในสามโลก" },
-  { id:"stu-34", number:"37", name:"— อนุธิดา แสนจุ้ม —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-35", number:"38", name:"— สุชานาฏ เพชรภาพร —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-36", number:"39", name:"— ชนันนัทธ์ ถาแก้ว —",               photo:null, nickname:"ฟิน",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-37", number:"40", name:"— ณัฐพร ธรรมแงะ —",               photo:"att.WaF9wriZdqbAQnjArMI_l5tw-2HLwVl-Eo-UP2mYw_g.jpeg", nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-38", number:"41", name:"— ดาวทิพย์ เลิศตระการพงษ์ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-39", number:"42", name:"— น้ำทิพย์ —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-40", number:"43", name:"— ปีย์วรา ศรีสมุทร —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
-  { id:"stu-41", number:"44", name:"— วัลยา ตาซาว —",               photo:null, nickname:"—",        birthday:"—",             dream:"—",                             quote:"—" },
+  { id:"stu-1",  number:"01", name:"- ฉัตรชกร ใจโปร่ง -",              photo:"att.yPCNM7IZrIagx74APk_dr1dbPoRdIBOoSlxr6YIbUsM.jpeg", nickname:"กัส",      birthday:"-",             dream:"-",             quote:"-" },
+  { id:"stu-2",  number:"02", name:"— ณัฐพงษ์ กันทพวงษ์ —",            photo:"att.1Gq4V8a-6FwZZSlxuJmEsd-KIVuMSlttGavgeRSHBKM.jpeg", nickname:"—",         birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-3",  number:"03", name:"— แดนวุฒิวัชร์ —",                  photo:null, nickname:"แดน",       birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-4",  number:"04", name:"— เอกรพี เสนแก้ว —",               photo:null, nickname:"เอก",        birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-5",  number:"07", name:"— วินัย อนันต์ธรภัทร —",           photo:null, nickname:"วินัย",      birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-6a", number:"08", name:"— ปวีณ์กร ถาตะนาน —",              photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-6b", number:"09", name:"— ภัทรพล มูลก่ำ —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-7",  number:"10", name:"— พศวีร์ วงษ์ถา —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-8",  number:"11", name:"— ชฎิล คำพลอย —",                photo:null, nickname:"ชฎิล",       birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",    photo:null, nickname:"กรณ์",       birthday:"April 06 2552", dream:"Software Engineer", quote:"Nothing much just Hope we Meet again in the future -The Founder" },
+  { id:"stu-10", number:"13", name:"— ณัฐเดช ปลื้มสุดใจ —",           photo:null, nickname:"เพรช",       birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-11", number:"14", name:"— ณัฐวุฒิ ส่างน้อย —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",            photo:"att.geP7WsOagxp-j2ZFSkTQqZbdaCj-V2jnHQvoWY_jNvQ.jpeg", nickname:"เต้ย", birthday:"—", dream:"Math Teacher", quote:"—" },
+  { id:"stu-13", number:"16", name:"— นัทธวัฒน์ หอมพิกุล —",          photo:"att.TdYkMOvShDsTK59oLJc2-W5JLZOyu3LsGJ9FFPyLeE8.jpeg", nickname:"—",   birthday:"—", dream:"—",            quote:"—" },
+  { id:"stu-14", number:"17", name:"— เอกภูมิ บัวยิ้ม —",             photo:"att.J1m8tOb_saOGrHt0DTX8DN7GFhCl8AiP9MfZWHGHRAs.jpeg", nickname:"—",   birthday:"—", dream:"—",            quote:"—" },
+  { id:"stu-15", number:"18", name:"— ปฏิภาณ ป้อมยุคล —",             photo:null, nickname:"จีโน่",      birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-16", number:"19", name:"— ศิริภาพรรณ ใฝ่จัน —",           photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-17", number:"20", name:"— สุทธิดา ขัดแพร่ —",             photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-18", number:"21", name:"— ธัญญาเรศ ยะวะ —",              photo:null, nickname:"มิ้ง",       birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-19", number:"22", name:"— นันทิศา พ่อเมืองแสนใจ —",       photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-20", number:"23", name:"— ณิชาภัทร ปัญโย —",             photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-21", number:"24", name:"— สถาพร ปัดสา —",                photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-23", number:"26", name:"— พัชรพร จำปาทิพย์ —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-25", number:"28", name:"— สิริยากร ธรรมใจ —",             photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-26", number:"29", name:"— สุชาดา แสงเสนา —",              photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-27", number:"30", name:"— ภัทรวรรณ ปันหล้า —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-28", number:"31", name:"— ชาญณภัทร ยลธรรธรรม —",         photo:null, nickname:"น้ำมนต์",    birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-29", number:"32", name:"— จิรัชญา ตาวตา —",              photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-31", number:"34", name:"— ธนาภรณ์ ไชยเมืองชื่น —",       photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-32", number:"35", name:"— ภูวิศา สมครอง —",              photo:null, nickname:"อุดหนุน",    birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-33", number:"36", name:"— รดา หลวงตุ้ย —",               photo:null, nickname:"ฮาร์ป",     birthday:"19/03/2008",    dream:"ayanokoji-kun", quote:"รักชิโนโนเมะ เอนะที่สุดในสามโลก" },
+  { id:"stu-34", number:"37", name:"— อนุธิดา แสนจุ้ม —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-35", number:"38", name:"— สุชานาฏ เพชรภาพร —",           photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-36", number:"39", name:"— ชนันนัทธ์ ถาแก้ว —",           photo:null, nickname:"ฟิน",        birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-37", number:"40", name:"— ณัฐพร ธรรมแงะ —",             photo:"att.WaF9wriZdqbAQnjArMI_l5tw-2HLwVl-Eo-UP2mYw_g.jpeg", nickname:"—", birthday:"—", dream:"—", quote:"—" },
+  { id:"stu-38", number:"41", name:"— ดาวทิพย์ เลิศตระการพงษ์ —",   photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-39", number:"42", name:"— น้ำทิพย์ —",                    photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-40", number:"43", name:"— ปีย์วรา ศรีสมุทร —",           photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-41", number:"44", name:"— วัลยา ตาซาว —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
 ];
 
 const TEACHER_QUOTES = [
@@ -582,7 +585,7 @@ const TEACHER_QUOTES = [
 ];
 
 const MESSAGES = [
-  { from:"— The Founder —", text:"Thank you for being part of these memories.May the future treat everyone well.And perhaps someday, our paths will cross again. — The Founder, Signed Out." },
+  { from:"— The Founder —", text:"Thank you for being part of these memories. May the future treat everyone well. And perhaps someday, our paths will cross again. — The Founder, Signed Out." },
   { from:"— Name —", text:"A farewell note. What do you want your classmates to remember?" },
   { from:"— Name —", text:"Leave your mark on this blackboard before we all go our separate ways." },
   { from:"— Name —", text:"A little wish, a little dream — placeholder for your words." },
@@ -607,8 +610,8 @@ const MESSAGES = [
 
 const PLAYLIST_1 = [
   { file: "Rokudenashi - One voice Official music instrumental video.mp3", title: "— One Voice (Instrumental) —" },
-  { file: "-Reload-.mp3",  title: "— キミの記憶 -Reload- —" },
-  //{ file: "— song-3.mp3 —",  title: "— Song 3 Title —" },
+  { file: "— song-2.mp3 —",  title: "— Song 2 Title —" },
+  { file: "— song-3.mp3 —",  title: "— Song 3 Title —" },
   // Add more: { file: "mysong.mp3", title: "My Song" },
 ];
 
@@ -875,7 +878,10 @@ function updateTL(){
   const d=new Date(TIMELINE_EVENTS[tlIdx].date);
   document.getElementById('tl-date-display').textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   document.querySelectorAll('.event-slide').forEach((s,i)=>s.classList.toggle('active',i===tlIdx));
-  document.querySelectorAll('.tl-dot').forEach((d,i)=>d.classList.toggle('active',i===tlIdx));
+  document.querySelectorAll('.tl-dot').forEach((dot,i)=>{
+    dot.classList.toggle('active',i===tlIdx);
+    if(i===tlIdx) dot.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  });
 }
 function goSlide(i){tlIdx=Math.max(0,Math.min(i,TIMELINE_EVENTS.length-1));updateTL();}
 function tlNav(d){goSlide(tlIdx+d);}
