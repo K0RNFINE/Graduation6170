@@ -166,7 +166,7 @@ body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',s
 .particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
 .particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--gold-light);opacity:0;animation:floatP var(--dur,8s) var(--delay,0s) infinite ease-in-out;}
 @keyframes floatP{0%{transform:translateY(100vh) translateX(0) scale(0);opacity:0;}10%{opacity:.8;}90%{opacity:.3;}100%{transform:translateY(-10vh) translateX(var(--dx,40px)) scale(1.5);opacity:0;}}
-.hero-overlay{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 24px;}
+.hero-overlay{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 24px;transform:translateY(-200px);}
 .hero-orn{display:flex;align-items:center;gap:18px;margin-bottom:8px;}
 .hero-line{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
 .hero-line.r{background:linear-gradient(90deg,var(--gold),transparent);}
@@ -410,6 +410,8 @@ Please, feel free to explore as you wish
       <h2 class="section-title">The <em>44</em> of Us</h2>
       <div class="section-divider"><div class="sdl"></div><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><div class="sdl r"></div></div>
     </div>
+    <div style="text-align:center;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:20px;">✦ Teachers ✦</div>
+    <div class="vip-row" id="vvip-row" style="margin-bottom:40px;"></div>
     <div class="vip-row" id="vip-row"></div>
     <div class="students-grid" id="students-grid"></div>
   </div>
@@ -515,7 +517,7 @@ Please, feel free to explore as you wish
 // ║           CONFIGURATION — Edit everything here       ║
 // ╚══════════════════════════════════════════════════════╝
 
-const HERO_IMAGE = "IMG_1022.jpeg";
+const HERO_IMAGE = "60663a6f-0bc3-491d-b9dc-207e5b61e818.jfif";
 const COUNTDOWN_TARGET = null;
 
 const TIMELINE_EVENTS = [
@@ -525,13 +527,20 @@ const TIMELINE_EVENTS = [
   { date:"2027-04-15", title:"— To be Continue —",              description:"To be Continue",                           mediaUrl:null, mediaType:"image" },
 ];
 
+const VVIP_STUDENTS = [
+  { id:"vvip-1", name:"— ครูสุนีย์ ยะสุกิม —", role:"Advisor", photo:null, nickname:"สุนีย์", birthday:"—", dream:"—", quote:"—" },
+  { id:"vvip-2", name:"— ครูเจษฎา จี๋ก๋อย —", role:"Advisor", photo:null, nickname:"เจษ", birthday:"—", dream:"—", quote:"—" },
+];
+
 const VIP_STUDENTS = [
   { id:"vip-1", name:"- ญาณัจฉรา ตาคำ -",      role:"หัวหน้าห้อง no.33",       photo:"att.nXjacGDbJ3iIVtz3QWdhm1Z8k8YCvdBQ8MSTHbTFwHU.jpeg", nickname:"วุ้นเส้น", birthday:"-",  dream:"-",           quote:"-" },
-  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"รองหัวหน้าห้อง no.5",    photo:null, nickname:"ข้าวป้าง",   birthday:"—",  dream:"ราชาโจรสลัด", quote:"สมบัติของฉันน่ะหรอฉันทิ้งไว้นั่นหมดแล้วอยากได้ก็ไปหาเอาสิ" },
+  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"รองหัวหน้าห้อง no.5",    photo:null, nickname:"ข้าวฟ้าง",   birthday:"—",  dream:"ราชาโจรสลัด", quote:"สมบัติของฉันน่ะหรอฉันทิ้งไว้นั่นหมดแล้วอยากได้ก็ไปหาเอาสิ" },
   { id:"vip-3", name:"— สินีนาถ เทพา —",        role:"เลขา no.27",              photo:null, nickname:"-",          birthday:"—",  dream:"—",           quote:"—" },
   { id:"vip-4", name:"— นภดล แสนมนตรี —",       role:"เหรัญญิก no.6",           photo:"att.ri-FT0GZn-Ys7pdoyI43TLoHnFkSpa3C8YriE7Zaoe4.jpeg", nickname:"นภ", birthday:"7/11/2550", dream:"—", quote:"—" },
   { id:"vip-5", name:"— กานต์ชนิต โยธา —",      role:"ประชาสัมพันธ์ no.25",    photo:null, nickname:"วุ้นเส้น",   birthday:"—",  dream:"—",           quote:"—" },
 ];
+
+
 
 const REGULAR_STUDENTS = [
   // ✏️ Change number:"XX" to whatever class number you want shown. Leave number:"" for blank.
@@ -544,7 +553,7 @@ const REGULAR_STUDENTS = [
   { id:"stu-6b", number:"09", name:"— ภัทรพล มูลก่ำ —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-7",  number:"10", name:"— พศวีร์ วงษ์ถา —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-8",  number:"11", name:"— ชฎิล คำพลอย —",                photo:null, nickname:"ชฎิล",       birthday:"—",             dream:"—",             quote:"—" },
-  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",    photo:null, nickname:"กรณ์",       birthday:"April 06 2552", dream:"Software Engineer if possible currently aim at MEXT-奨学金", quote:"Nothing much just Hope we Meet again in the future -The Founder" },
+  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",    photo:"558f5da4-51fd-435d-9b67-8fe21f8a279a.jfif", nickname:"กรณ์",       birthday:"April 06 2552", dream:"Software Engineer/CyberSecurity Maybe MEXT :>", quote:"Nothing much just Hope we Meet again in the future -The Founder" },
   { id:"stu-10", number:"13", name:"— ณัฐเดช ปลื้มสุดใจ —",           photo:null, nickname:"เพรช",       birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-11", number:"14", name:"— ณัฐวุฒิ ส่างน้อย —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",            photo:"att.geP7WsOagxp-j2ZFSkTQqZbdaCj-V2jnHQvoWY_jNvQ.jpeg", nickname:"เต้ย", birthday:"8/9/2551", dream:"Math Teacher", quote:"—" },
@@ -577,12 +586,12 @@ const REGULAR_STUDENTS = [
 ];
 
 const TEACHER_QUOTES = [
-  { name:"— Teacher Name —", subject:"Subject", quote:"Leave a beautiful message for the students here. Words that will inspire them long after they've left these halls." },
-  { name:"— Teacher Name —", subject:"Subject", quote:"Fill this space with your heartfelt blessing and words of wisdom for our graduating class." },
-  { name:"— Teacher Name —", subject:"Subject", quote:"Your encouragement, your wisdom, your dedication — placeholder for a meaningful quote." },
-  { name:"— Teacher Name —", subject:"Subject", quote:"A space for your words. What do you wish them to carry into their future?" },
-  { name:"— Teacher Name —", subject:"Subject", quote:"Words that last longer than any lesson. Share your blessing here." },
-  { name:"— Teacher Name —", subject:"Subject", quote:"The greatest gift a teacher gives is the belief in a student's potential." },
+  { name:"— Teacher Name —", subject:"Subject", quote:"N/A" },
+  { name:"— Teacher Name —", subject:"Subject", quote:"N/A" },
+  { name:"— Teacher Name —", subject:"Subject", quote:"N/A" },
+  { name:"— Teacher Name —", subject:"Subject", quote:"N/A" },
+  { name:"— Teacher Name —", subject:"Subject", quote:"N/A" },
+  { name:"— Teacher Name —", subject:"Subject", quote:"N/A" },
 ];
 
 const MESSAGES = [
@@ -811,6 +820,7 @@ if(HERO_IMAGE){
 const personSVG=(sz='40px')=>`<svg class="ph-icon" style="width:${sz};height:${sz}" viewBox="0 0 24 24" fill="var(--gold-dim)"><path opacity=".4" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>`;
 function photoOrPh(p,sz){ return p?`<img src="${p}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/>`:personSVG(sz); }
 
+
 // BUILD VIP
 function buildVIP(){
   const row=document.getElementById('vip-row');
@@ -818,6 +828,18 @@ function buildVIP(){
     const div=document.createElement('div');
     div.className='vip-card';
     div.innerHTML=`<div class="vip-ring"><div class="vip-photo">${photoOrPh(s.photo,'40px')}</div></div><div class="vip-badge">${s.role}</div><div class="vip-name">${s.name}</div>`;
+    div.addEventListener('click',()=>openModal(s,true));
+    row.appendChild(div);
+  });
+}
+
+function buildVVIP(){
+  const row=document.getElementById('vvip-row');
+  if(!row) return; // stop safely if the HTML div wasn't added
+  VVIP_STUDENTS.forEach(s=>{
+    const div=document.createElement('div');
+    div.className='vip-card';
+    div.innerHTML=`<div class="vip-ring" style="width:170px;height:170px;box-shadow:0 0 40px rgba(201,168,76,.5);"><div class="vip-photo">${photoOrPh(s.photo,'40px')}</div></div><div class="vip-badge">${s.role}</div><div class="vip-name">${s.name}</div>`;
     div.addEventListener('click',()=>openModal(s,true));
     row.appendChild(div);
   });
@@ -931,7 +953,13 @@ function buildMessages(){
 }
 
 // INIT
-buildVIP();buildRegular();buildTimeline();buildQuotes();buildMessages();
+// INIT
+try{buildVVIP();}catch(e){console.error('VVIP failed:',e);}
+try{buildVIP();}catch(e){console.error('VIP failed:',e);}
+try{buildRegular();}catch(e){console.error('Regular failed:',e);}
+try{buildTimeline();}catch(e){console.error('Timeline failed:',e);}
+try{buildQuotes();}catch(e){console.error('Quotes failed:',e);}
+try{buildMessages();}catch(e){console.error('Messages failed:',e);}
 if(COUNTDOWN_TARGET){updateCountdown();setInterval(updateCountdown,1000);}
 </script>
 </body>
