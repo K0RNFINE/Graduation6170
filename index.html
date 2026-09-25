@@ -393,7 +393,7 @@ Please, feel free to explore as you wish
       <div class="hero-line r"></div>
     </div>
     <div class="hero-class">Class of 2026 &nbsp;·&nbsp; M.6/1</div>
-    <h1 class="hero-title">Memory<br><span>Library</span></h1>
+    <h1 class="hero-title">Memory<br><span>Library (WIP)</span></h1>
     <p class="hero-sub">Where every moment becomes a memory forever.</p>
   </div>
   <div class="scroll-hint">
@@ -407,7 +407,7 @@ Please, feel free to explore as you wish
   <div class="section-wrap">
     <div class="section-header">
       <div class="section-label">Our Class</div>
-      <h2 class="section-title">The <em>44</em> of Us</h2>
+      <h2 class="section-title">The <em>44</em> of Us + <em>2</em> Teachers</h2>
       <div class="section-divider"><div class="sdl"></div><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg><div class="sdl r"></div></div>
     </div>
     <div style="text-align:center;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:20px;">✦ Teachers ✦</div>
@@ -523,18 +523,23 @@ const COUNTDOWN_TARGET = null;
 const TIMELINE_EVENTS = [
   { date:"2026-05-18", title:"— The First Semester Begin —",    description:"First day of new Semester",               mediaUrl:"att.bSAL6uVgwO_o1-9o0p07uRDBu0ARo8fXy2iQHgvwKO0.jpeg", mediaType:"image" },
   { date:"2026-05-22", title:"— Completed First week cycle —",  description:"Go through all day on the week first time", mediaUrl:"att.gRQr-4-Q0rF1WpEVHdc0jYlqWaI2j9whdsIu12ooON0.jpeg", mediaType:"image" },
-  { date:"2027-06-18", title:"— Teacher day —",              description:"The Teacher day for one last time as M.6/1",  mediaUrl:"IMG_1241.jpeg", mediaType:"image" },
-  { date:"2027-04-15", title:"— To be Continue —",              description:"To be Continue",                           mediaUrl:null, mediaType:"image" },
+  { date:"2026-06-18", title:"— Teacher day —",              description:"The Teacher day for one last time as M.6/1",  mediaUrl:"IMG_1241.jpeg", mediaType:"image" },
+  { date:"2026-07-20", title:"— The Mid Exam —",              description:"Midterm Exam Test",                           mediaUrl:null, mediaType:"image" },
+  { date:"2027-08-03", title:"— The Tutor Week —",              description:"Tutoring all 5 Subjects",                           mediaUrl:null, mediaType:"image" },
+  { date:"2027-08-21", title:"— Science Day —",              description:"Selling หมี่ไก่ฉีก https://dek70m61.github.io/Pre-Order/",                           mediaUrl:null, mediaType:"image" },
+  { date:"2027-09-25", title:"— Teacher Retired —",              description:"Teacher Retired Farewell Event",                           mediaUrl:"60663a6f-0bc3-491d-b9dc-207e5b61e818.jfif", mediaType:"image" },
+  { date:"2026-09-28", title:"— Final Exam Test —",              description:"A Final Test for 6/1 Semester 1",                           mediaUrl:null, mediaType:"image" },
+  { date:"2027-09-30", title:"— To be Continue —",              description:"To be Continue",                           mediaUrl:null, mediaType:"image" },
 ];
 
 const VVIP_STUDENTS = [
   { id:"vvip-1", name:"— ครูสุนีย์ ยะสุกิม —", role:"Advisor", photo:null, nickname:"สุนีย์", birthday:"—", dream:"—", quote:"—" },
-  { id:"vvip-2", name:"— ครูเจษฎา จี๋ก๋อย —", role:"Advisor", photo:null, nickname:"เจษ", birthday:"—", dream:"—", quote:"—" },
+  { id:"vvip-2", name:"— ครูเจษฎา จี๋ก๋อย —", role:"Advisor", photo:"6937851f-feb2-4991-8380-ad7b3a07cf4a.jpg", nickname:"เจษ", birthday:"—", dream:"—", quote:"—" },
 ];
 
 const VIP_STUDENTS = [
   { id:"vip-1", name:"- ญาณัจฉรา ตาคำ -",      role:"หัวหน้าห้อง no.33",       photo:"att.nXjacGDbJ3iIVtz3QWdhm1Z8k8YCvdBQ8MSTHbTFwHU.jpeg", nickname:"วุ้นเส้น", birthday:"-",  dream:"-",           quote:"-" },
-  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"รองหัวหน้าห้อง no.5",    photo:null, nickname:"ข้าวฟ้าง",   birthday:"—",  dream:"ราชาโจรสลัด", quote:"สมบัติของฉันน่ะหรอฉันทิ้งไว้นั่นหมดแล้วอยากได้ก็ไปหาเอาสิ" },
+  { id:"vip-2", name:"— ธนโชติ แสนฟอง —",       role:"รองหัวหน้าห้อง no.5",    photo:null, nickname:"ข้าวฟ้าง",   birthday:"—",  dream:"ราชาโจรสลัด", quote:"สมบัติของฉันน่ะหรอฉันทิ้งไว้นั่นหมดแล้วอยากได้ก็ไปหาเอาสิ!" },
   { id:"vip-3", name:"— สินีนาถ เทพา —",        role:"เลขา no.27",              photo:null, nickname:"-",          birthday:"—",  dream:"—",           quote:"—" },
   { id:"vip-4", name:"— นภดล แสนมนตรี —",       role:"เหรัญญิก no.6",           photo:"att.ri-FT0GZn-Ys7pdoyI43TLoHnFkSpa3C8YriE7Zaoe4.jpeg", nickname:"นภ", birthday:"7/11/2550", dream:"—", quote:"—" },
   { id:"vip-5", name:"— กานต์ชนิต โยธา —",      role:"ประชาสัมพันธ์ no.25",    photo:null, nickname:"วุ้นเส้น",   birthday:"—",  dream:"—",           quote:"—" },
@@ -553,12 +558,12 @@ const REGULAR_STUDENTS = [
   { id:"stu-6b", number:"09", name:"— ภัทรพล มูลก่ำ —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-7",  number:"10", name:"— พศวีร์ วงษ์ถา —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-8",  number:"11", name:"— ชฎิล คำพลอย —",                photo:null, nickname:"ชฎิล",       birthday:"—",             dream:"—",             quote:"—" },
-  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",    photo:"558f5da4-51fd-435d-9b67-8fe21f8a279a.jfif", nickname:"กรณ์",       birthday:"April 06 2552", dream:"Software Engineer/CyberSecurity Maybe MEXT :>", quote:"Nothing much just Hope we Meet again in the future -The Founder" },
+  { id:"stu-9",  number:"12", name:"— ณปภัทร์พนฑ์ ยุวรรณศิริ —",    photo:"558f5da4-51fd-435d-9b67-8fe21f8a279a.jfif", nickname:"กรณ์",       birthday:"April 06 2552", dream:"Software Engineer/CyberSecurity Maybe MEXT :>", quote:"Nothing much just Hope we Meet again in the future" },
   { id:"stu-10", number:"13", name:"— ณัฐเดช ปลื้มสุดใจ —",           photo:null, nickname:"เพรช",       birthday:"—",             dream:"—",             quote:"—" },
-  { id:"stu-11", number:"14", name:"— ณัฐวุฒิ ส่างน้อย —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-11", number:"14", name:"— ณัฐวุฒิ ส่างน้อย —",            photo:null, nickname:"แดม",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-12", number:"15", name:"— ธรดล โสภาพันธุ์ —",            photo:"att.geP7WsOagxp-j2ZFSkTQqZbdaCj-V2jnHQvoWY_jNvQ.jpeg", nickname:"เต้ย", birthday:"8/9/2551", dream:"Math Teacher", quote:"—" },
   { id:"stu-13", number:"16", name:"— นัทธวัฒน์ หอมพิกุล —",          photo:"att.TdYkMOvShDsTK59oLJc2-W5JLZOyu3LsGJ9FFPyLeE8.jpeg", nickname:"—",   birthday:"—", dream:"—",            quote:"—" },
-  { id:"stu-14", number:"17", name:"— เอกภูมิ บัวยิ้ม —",             photo:"att.J1m8tOb_saOGrHt0DTX8DN7GFhCl8AiP9MfZWHGHRAs.jpeg", nickname:"—",   birthday:"—", dream:"—",            quote:"—" },
+  { id:"stu-14", number:"17", name:"— เอกภูมิ บัวยิ้ม —",             photo:"att.J1m8tOb_saOGrHt0DTX8DN7GFhCl8AiP9MfZWHGHRAs.jpeg", nickname:"ภูมิ/เอก",   birthday:"—", dream:"—",            quote:"—" },
   { id:"stu-15", number:"18", name:"— ปฏิภาณ ป้อมยุคล —",             photo:"IMG_1168.png", nickname:"จีโน่",      birthday:"32/13/2570",             dream:"@zukaii_rockband",             quote:"อยู่ดีๆไม่ได้เสือกอยากมีบท" },
   { id:"stu-16", number:"19", name:"— ศิริภาพรรณ ใฝ่จัน —",           photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-17", number:"20", name:"— สุทธิดา ขัดแพร่ —",             photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
@@ -577,10 +582,10 @@ const REGULAR_STUDENTS = [
   { id:"stu-33", number:"36", name:"— รดา หลวงตุ้ย —",               photo:null, nickname:"ฮาร์ป",     birthday:"19/03/2008",    dream:"ayanokoji-kun", quote:"รักชิโนโนเมะ เอนะที่สุดในสามโลก" },
   { id:"stu-34", number:"37", name:"— อนุธิดา แสนจุ้ม —",            photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-35", number:"38", name:"— สุชานาฏ เพชรภาพร —",           photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
-  { id:"stu-36", number:"39", name:"— ชนันนัทธ์ ถาแก้ว —",           photo:null, nickname:"ฟิน",        birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-36", number:"39", name:"— ชนันนัทธ์ ถาแก้ว —",           photo:null, nickname:"กาฟิน",        birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-37", number:"40", name:"— ณัฐพร ธรรมแงะ —",             photo:"att.WaF9wriZdqbAQnjArMI_l5tw-2HLwVl-Eo-UP2mYw_g.jpeg", nickname:"—", birthday:"—", dream:"—", quote:"—" },
   { id:"stu-38", number:"41", name:"— ดาวทิพย์ เลิศตระการพงษ์ —",   photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
-  { id:"stu-39", number:"42", name:"— น้ำทิพย์ —",                    photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
+  { id:"stu-39", number:"42", name:"— น้ำทิพย์ —",                    photo:null, nickname:"น้ำ",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-40", number:"43", name:"— ปีย์วรา ศรีสมุทร —",           photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
   { id:"stu-41", number:"44", name:"— วัลยา ตาซาว —",               photo:null, nickname:"—",          birthday:"—",             dream:"—",             quote:"—" },
 ];
@@ -620,7 +625,7 @@ const MESSAGES = [
 
 const PLAYLIST_1 = [
   { file: "Rokudenashi - One voice Official music instrumental video.mp3", title: "— One Voice (Instrumental) —" },
-  { file: "-Reload-.mp3",  title: "— キミの記憶 -Reload- —" },
+  { file: "NULL",  title: "— Template- —" },
   { file: "VJ Narvent - Memory Reboot 4K Music Video.mp3",  title: "— Memory Reboot —" },
   // Add more: { file: "mysong.mp3", title: "My Song" },
 ];
